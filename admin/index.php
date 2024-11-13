@@ -68,8 +68,8 @@ match ($act) {
     'them-khuyen-mai' => (new AdminKhuyenMaiController())->postAddKhuyenMai(),
     'chi-tiet-khuyen-mai' => (new AdminKhuyenMaiController)->getDetailKhuyenMai(),
     'form-sua-khuyen-mai' => (new AdminKhuyenMaiController())->formEditKhuyenMai(),
-    'sua-khuyen-mai' => (new AdminKhuyenMaiController())->postEditKhuyenMai(),
-    'xoa-khuyen-mai' => (new AdminKhuyenMaiController())->deleteKhuyenMai(),
+    'sua-khuyen-mai' => (new AdminKhuyenMaiController())->KhuyenMai(),
+    'xoa-khuyen-mai' => (new AdminKhuyenMaiController())->xoaKhuyenMai(),
 
      // Trạng thái Đơn Hàng
 
