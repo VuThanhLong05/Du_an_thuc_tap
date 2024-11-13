@@ -8,7 +8,7 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/HomeController.php';
 
 // Require toàn bộ file Models
-require_once './models/KhuyenMai.php';
+// require_once './models/KhuyenMai.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -19,12 +19,6 @@ match ($act) {
     // Trang chủ
     '/' => (new HomeController())->home(),
     
-    'khuyen-mai' => (new HomeController())->danhSachKhuyenMai(), // List all promotions
-    // 'chi-tiet-khuyen-mai ' => (new HomeController())->getDetailKhuyenMai(),// View a specific promotion
-    'them-khuyen-mai'=>(new HomeController())->formAddKhuyenMai(),// Form for adding a new promotion
-    'post-add-khuyen-mai' => (new HomeController())->postAddKhuyenMai(),// Add a new promotion to the database
-    'sua-khuyen-mai' => (new HomeController())->formEditKhuyenMai(),// Form for editing a promotion
-    'post-edit-khuyen-mai' => (new HomeController())->postEditKhuyenMai(),// Update promotion
-    'xoa-khuyen-mai' => (new HomeController())->deleteKhuyenMai(),// Delete promotion
+    
     
 };
