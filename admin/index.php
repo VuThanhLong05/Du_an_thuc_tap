@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 
@@ -7,26 +7,28 @@ require_once '../commons/env.php'; // Correct path to env.php
 require_once '../commons/function.php'; // Correct path to function.php
 
 // Require toàn bộ file Controllers
-require_once './controllers/AdminKhuyenMaiController.php'; 
+require_once './controllers/AdminKhuyenMaiController.php';
 require_once './controllers/AdminBaoCaoThongKeController.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminBaiVietController.php';
-require_once './controllers/AdminTrangThaiDonHangController.php'; 
+require_once './controllers/AdminTrangThaiDonHangController.php';
 require_once './controllers/AdminBannerController.php';
 require_once './controllers/AdminSanPhamController.php';
 require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminBinhLuanController.php';
+require_once './controllers/AdminLienHeController.php';
 
 
 // Require toàn bộ file Models
 require_once './models/AdminDanhMuc.php';
-require_once './models/AdminKhuyenMai.php'; 
-require_once './models/AdminTrangThaiDonHang.php'; 
-require_once './models/AdminBaiViet.php'; 
+require_once './models/AdminKhuyenMai.php';
+require_once './models/AdminTrangThaiDonHang.php';
+require_once './models/AdminBaiViet.php';
 require_once './models/AdminBanner.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminBinhLuan.php';
+require_once './models/AdminLienHe.php';
 
 
 
@@ -42,7 +44,7 @@ match ($act) {
     '/' => (new AdminBaoCaoThongKeController())->home(),
 
     //danh mục
-    
+
     'danh-muc' => (new AdminDanhMucController())->danhSachDanhMuc(),
     'form-them-danh-muc' => (new AdminDanhMucController())->formAddDanhMuc(),
     'them-danh-muc' => (new AdminDanhMucController())->postAddDanhMuc(),
@@ -68,19 +70,19 @@ match ($act) {
     'them-khuyen-mai' => (new AdminKhuyenMaiController())->postAddKhuyenMai(),
     'chi-tiet-khuyen-mai' => (new AdminKhuyenMaiController)->getDetailKhuyenMai(),
     'form-sua-khuyen-mai' => (new AdminKhuyenMaiController())->formEditKhuyenMai(),
-    'sua-khuyen-mai' => (new AdminKhuyenMaiController())->postEditKhuyenMai(),
-    'xoa-khuyen-mai' => (new AdminKhuyenMaiController())->deleteKhuyenMai(),
+    // 'sua-khuyen-mai' => (new AdminKhuyenMaiController())->postEditKhuyenMai(),
+    // 'xoa-khuyen-mai' => (new AdminKhuyenMaiController())->deleteKhuyenMai(),
 
-     // Trạng thái Đơn Hàng
+    // Trạng thái Đơn Hàng
 
-     'trang-thai-don-hang' => (new AdminTrangThaiDonHangController())->danhSachTrangThai(),
-     'form-cap-nhat-trang-thai' => (new AdminTrangThaiDonHangController())->formSuaTrangThai(),
-     'cap-nhat-trang-thai' => (new AdminTrangThaiDonHangController())->postSuaTrangThai(),
-     'xoa-trang-thai' => (new AdminTrangThaiDonHangController())->xoaTrangThai(),
-     'form-them-trang-thai' => (new AdminTrangThaiDonHangController())->formThemTrangThai(),
-     'them-trang-thai' => (new AdminTrangThaiDonHangController())->themTrangThai(), 
+    'trang-thai-don-hang' => (new AdminTrangThaiDonHangController())->danhSachTrangThai(),
+    'form-cap-nhat-trang-thai' => (new AdminTrangThaiDonHangController())->formSuaTrangThai(),
+    'cap-nhat-trang-thai' => (new AdminTrangThaiDonHangController())->postSuaTrangThai(),
+    'xoa-trang-thai' => (new AdminTrangThaiDonHangController())->xoaTrangThai(),
+    'form-them-trang-thai' => (new AdminTrangThaiDonHangController())->formThemTrangThai(),
+    'them-trang-thai' => (new AdminTrangThaiDonHangController())->themTrangThai(),
 
-     // bai viết
+    // bai viết
 
     'danh-sach-bai-viet' => (new AdminBaiVietController)->danhSachBaiViet(),
     'form-them-bai-viet' => (new AdminBaiVietController)->formAddBaiViet(),
@@ -119,7 +121,7 @@ match ($act) {
     // QUản lý tài khoản cá nhân(quản trị)
     'form-sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->formEditCaNhanQuanTri(),
     'sua-thong-tin-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditCaNhanQuanTri(),
-    
+
     'sua-mat-khau-ca-nhan-quan-tri' => (new AdminTaiKhoanController())->postEditMatKhauCaNhan(),
 
 
@@ -128,12 +130,14 @@ match ($act) {
     'check-log-admin' => (new AdminTaiKhoanController)->login(),
     'logout-admin' => (new AdminTaiKhoanController)->logout(),
 
-     // Bình luận
-     'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
-     'updata-trang-thai-binh-luan' => (new AdminBinhLuanController())->updataTrangThaiBinhLuan(),
-     'binh-luan' => (new AdminBinhLuanController())->danhSachBinhLuan(),
-     'delete-binh-luan' => (new AdminBinhLuanController())->xoaBinhLuan(),
- 
+    // Bình luận
+    'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
+    'updata-trang-thai-binh-luan' => (new AdminBinhLuanController())->updataTrangThaiBinhLuan(),
+    'binh-luan' => (new AdminBinhLuanController())->danhSachBinhLuan(),
+    'delete-binh-luan' => (new AdminBinhLuanController())->xoaBinhLuan(),
 
- 
+    //Liên hệ
+    'danh-sach-lien-he' => (new AdminLienHeController())->danhSachLienHe(),
+    'chi-tiet-lien-he' => (new AdminLienHeController())->getDetailLienHe(),
+    'xoa-lien-he' => (new AdminLienHeController())->xoaBaiViet(),
 };
