@@ -70,6 +70,15 @@
          </li>
 
          <li class="nav-item">
+           <a href="<?= BASE_URL_ADMIN . '?act=danh-sach-lien-he' ?>" class="nav-link">
+             <i class="nav-icon fas fa-id-card"></i>
+             <p>
+               Liên hệ
+             </p>
+           </a>
+         </li>
+
+         <li class="nav-item">
           <a href="<?= BASE_URL_ADMIN . '?act=khuyen-mai' ?>" class="nav-link">
             <i class="nav-icon fas fa-tags"></i>
             <p>
