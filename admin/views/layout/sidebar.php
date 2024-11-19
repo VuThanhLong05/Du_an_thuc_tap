@@ -52,19 +52,28 @@
 
 
          <li class="nav-item">
-           <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="nav-link">
-             <i class="nav-icon fas fa-file-invoice-dollar"></i>
-             <p>
-               Đơn hàng
-             </p>
-           </a>
-         </li>
+          <a href="<?= BASE_URL_ADMIN . '?act=don-hang' ?>" class="nav-link">
+            <i class="nav-icon fas fa-file-invoice-dollar"></i>
+            <p>
+              Đơn hàng
+            </p>
+          </a>
+        </li>
 
          <li class="nav-item">
            <a href="<?= BASE_URL_ADMIN . '?act=trang-thai-don-hang' ?>" class="nav-link">
              <i class="nav-icon fas fa-file-invoice-dollar"></i>
              <p>
                Trạng thái đơn hàng
+             </p>
+           </a>
+         </li>
+
+         <li class="nav-item">
+           <a href="<?= BASE_URL_ADMIN . '?act=danh-sach-lien-he' ?>" class="nav-link">
+             <i class="nav-icon fas fa-id-card"></i>
+             <p>
+               Liên hệ
              </p>
            </a>
          </li>
@@ -90,6 +99,14 @@
              <i class="nav-icon fas fa-comment"></i>
              <p>
                Bình luận
+             </p>
+           </a>
+         </li>
+      <li class="nav-item">
+           <a href="<?= BASE_URL_ADMIN . '?act=danh-gia' ?>" class="nav-link">
+             <i class="nav-icon fas fa-comment"></i>
+             <p>
+               Đánh giá
              </p>
            </a>
          </li>

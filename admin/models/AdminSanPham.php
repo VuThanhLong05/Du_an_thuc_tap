@@ -240,6 +240,7 @@ class AdminSanPham
         }
     }
 
+    // Bình luận
     public function getBinhLuanFromKhachHang($id)
     {
         try {
@@ -302,6 +303,59 @@ class AdminSanPham
                     FROM binh_luans
                     INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
                     WHERE binh_luans.san_pham_id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
+    }
+
+    // Đanh giá
+    public function getDanhGiaFromKhachHang($id)
+    {
+        try {
+            $sql = 'SELECT danh_gias.*, san_phams.ten_san_pham
+                    FROM danh_gias
+                    INNER JOIN san_phams ON danh_gias.san_pham_id = san_phams.id
+                    WHERE danh_gias.tai_khoan_id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
+    }
+
+    public function getDetailDanhGia($id)
+    {
+
+        try {
+            $sql = 'SELECT * FROM danh_gias WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([':id' => $id]);
+
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo 'Lỗi' . $e->getMessage();
+        }
+    }
+
+    public function getDanhGiaFromSanPham($id)
+    {
+        try {
+            $sql = 'SELECT danh_gias.*, tai_khoans.ho_ten
+                FROM danh_gias
+                INNER JOIN tai_khoans ON danh_gias.tai_khoan_id = tai_khoans.id
+                WHERE danh_gias.san_pham_id = :id';
 
             $stmt = $this->conn->prepare($sql);
 
