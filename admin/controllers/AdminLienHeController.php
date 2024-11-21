@@ -75,7 +75,7 @@ class AdminLienHeController
 
     //         // var_dump($errors);die();
 
-
+           
     //         if (empty($errors)) {
 
     //             $this->modelBaiViet->insertBaiViet(
@@ -167,6 +167,7 @@ class AdminLienHeController
     //         }
     //     }
     // }
+
     public function xoaBaiViet()
     {
         // Lấy ra id danh mục cần xóa
