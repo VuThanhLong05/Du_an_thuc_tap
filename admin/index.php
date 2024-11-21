@@ -8,14 +8,16 @@ require_once '../commons/function.php'; // Correct path to function.php
 
 // Require toàn bộ file Controllers
 require_once './controllers/AdminKhuyenMaiController.php';
-require_once './controllers/AdminBaoCaoThongKeController.php';
+require_once './controllers/AdminThongKeController.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminBaiVietController.php';
 require_once './controllers/AdminTrangThaiDonHangController.php';
 require_once './controllers/AdminBannerController.php';
 require_once './controllers/AdminSanPhamController.php';
+require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminBinhLuanController.php';
+require_once './controllers/AdminDanhGiaController.php';
 require_once './controllers/AdminLienHeController.php';
 
 
@@ -28,7 +30,10 @@ require_once './models/AdminBanner.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminBinhLuan.php';
+require_once './models/AdminDanhGia.php';
 require_once './models/AdminLienHe.php';
+require_once './models/AdminDonHang.php';
+require_once './models/AdminThongKe.php';
 
 
 
@@ -39,9 +44,8 @@ if ($act !== 'check-log-admin' && $act !== 'logout-admin') {
     checkLoginAdmin();
 }
 
-
 match ($act) {
-    '/' => (new AdminBaoCaoThongKeController())->home(),
+    '/' => (new AdminThongKeController())->home(),
 
     //danh mục
 
@@ -140,4 +144,13 @@ match ($act) {
     'danh-sach-lien-he' => (new AdminLienHeController())->danhSachLienHe(),
     'chi-tiet-lien-he' => (new AdminLienHeController())->getDetailLienHe(),
     'xoa-lien-he' => (new AdminLienHeController())->xoaBaiViet(),
+
+    // rou Đơn hàng
+    'don-hang' => (new AdminDonHangController())->danhSachDonHang(),
+    'form-sua-don-hang' => (new AdminDonHangController())->formEditDonHang(),
+    'sua-don-hang' => (new AdminDonHangController())->postEditDonHang(),
+    'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
+
+    // dánh gía
+    "danh-gia" => (new AdminDanhGiaController())->danhSachDanhGia(),
 };

@@ -27,7 +27,7 @@ class AdminBinhLuanController
             exit();
         }
     }
-   
+
 
     public function postEditBinhLuan()
     {
@@ -56,7 +56,8 @@ class AdminBinhLuanController
         }
     }
 
-    public function xoaBinhLuan() {
+    public function xoaBinhLuan()
+    {
         $id = $_GET['id_binh_luan'];
         $binhLuan = $this->conn->getDetailBinhLuan($id);
 
@@ -66,8 +67,8 @@ class AdminBinhLuanController
         header('location: ' . BASE_URL_ADMIN . '?act=binh-luan');
         exit();
     }
-    
-    
+
+
 
     public function updataTrangThaiBinhLuan()
     {

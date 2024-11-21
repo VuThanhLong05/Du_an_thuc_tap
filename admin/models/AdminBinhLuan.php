@@ -8,20 +8,6 @@ class AdminBinhLuan
         $this->conn = connectDB();
     }
 
-    // Lấy toàn bộ bình luận
-    // public function getAllBinhLuan()
-    // {
-    //     try {
-    //         $sql = 'SELECT binh_luans.*, tai_khoans.ho_ten 
-    //                 FROM binh_luans 
-    //                 JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id';
-    //         $stmt = $this->conn->prepare($sql);
-    //         $stmt->execute();
-    //         return $stmt->fetchAll();
-    //     } catch (Exception $e) {
-    //         echo 'Lỗi: ' . $e->getMessage();
-    //     }
-    // }
     public function getAllBinhLuan()
     {
         try {
@@ -36,25 +22,6 @@ class AdminBinhLuan
             echo 'Lỗi: ' . $e->getMessage();
         }
     }
-    // Thêm mới một bình luận
-    // public function insertBinhLuan($noi_dung, $id_nguoi_dung, $trang_thai)
-    // {
-    //     try {
-    //         $sql = 'INSERT INTO binh_luans (noi_dung, id_nguoi_dung, trang_thai)
-    //                 VALUES (:noi_dung, :id_nguoi_dung, :trang_thai)';
-
-    //         $stmt = $this->conn->prepare($sql);
-    //         $stmt->execute([
-    //             ':noi_dung' => $noi_dung,
-    //             ':id_nguoi_dung' => $id_nguoi_dung,
-    //             ':trang_thai' => $trang_thai
-    //         ]);
-
-    //         return true;
-    //     } catch (Exception $e) {
-    //         echo 'Lỗi: ' . $e->getMessage();
-    //     }
-    // }
 
     // Lấy chi tiết một bình luận
     public function getDetailBinhLuan($id)

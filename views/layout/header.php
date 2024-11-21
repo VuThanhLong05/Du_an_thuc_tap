@@ -3,18 +3,19 @@
 
 
 <!-- Mirrored from htmldemo.net/corano/corano/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Jun 2024 09:53:03 GMT -->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Website bán thú cưng</title>
+    <title>Website bán gấu bông</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/dog.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/logo1.png">
 
     <!-- CSS
-	============================================ -->
+    ============================================ -->
     <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,900" rel="stylesheet">
     <!-- Bootstrap CSS -->
