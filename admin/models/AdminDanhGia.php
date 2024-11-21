@@ -11,30 +11,69 @@ class AdminDanhGia
     // Lấy toàn bộ danh sách đánh giá
     public function getAllDanhGia()
     {
-        $stmt = $this->conn->prepare("SELECT account.ho_ten, orders.ma_don_hang, danh_gias.noi_dung, danh_gias.ngay_dang, danh_gias.trang_thai FROM `danh_gias`
-                                            INNER JOIN don_hangs as orders
-                                            on danh_gias.don_hang_id = orders.id
-                                            INNER JOIN tai_khoans as account
-                                            on account.id = danh_gias.tai_khoan_id");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $sql = 'SELECT danh_gias.*, tai_khoans.ho_ten, san_phams.ten_san_pham 
+                    FROM danh_gias 
+                    LEFT JOIN tai_khoans ON danh_gias.tai_khoan_id = tai_khoans.id
+                    LEFT JOIN san_phams ON danh_gias.san_pham_id = san_phams.id';
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
     }
 
     // Lấy chi tiết một đánh giá
-    public function getDetailDanhGia($id_danh_gia)
+    public function getDetailDanhGia($id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM danh_gias WHERE id = :id");
-        $stmt->bindParam(":id", $id_danh_gia, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            $sql = 'SELECT * FROM danh_gias WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch();
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
     }
 
     // Cập nhật trạng thái duyệt của một đánh giá
-    public function updateTrangThaiDanhGia($id_danh_gia, $trang_thai_moi)
+    public function updateDanhGia($id, $noi_dung, $trang_thai)
     {
-        $stmt = $this->conn->prepare("UPDATE danh_gias SET trang_thai = :trang_thai WHERE id = :id");
-        $stmt->bindParam(":trang_thai", $trang_thai_moi, PDO::PARAM_INT);
-        $stmt->bindParam(":id", $id_danh_gia, PDO::PARAM_INT);
-        return $stmt->execute();
+        try {
+            $sql = 'UPDATE danh_gias SET noi_dung = :noi_dung, trang_thai = :trang_thai  WHERE id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':noi_dung' => $noi_dung,
+                ':trang_thai' => $trang_thai,
+                ':id' => $id
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
+    }
+
+    public function updateTrangThaiDanhGia($id, $trang_thai)
+    {
+        try {
+            $sql = 'UPDATE danh_gias
+                        SET
+                            trang_thai = :trang_thai
+                        WHERE id = :id';
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->execute([
+                ':trang_thai' => $trang_thai,
+                ':id' => $id
+            ]);
+            // lấy id sản phẩm vừa thêm
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi" . $e->getMessage();
+        }
     }
 }

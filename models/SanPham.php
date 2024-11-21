@@ -1,7 +1,6 @@
 <?php
 class SanPham
 {
-
     public $conn;
 
     public function __construct()
@@ -13,49 +12,44 @@ class SanPham
     {
         try {
             $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
-            FROM san_phams
-            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id';
-
+                    FROM san_phams
+                    INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id';
             $stmt = $this->conn->prepare($sql);
-
             $stmt->execute();
-
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo 'Lỗi' . $e->getMessage();
+            // Log error to a file instead of displaying it directly
+            error_log('Lỗi: ' . $e->getMessage());
+            return false;
         }
     }
 
     public function getDetailSanPham($id)
     {
         try {
-            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc FROM san_phams
-                INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
-                WHERE san_phams.id = :id';
-
+            $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc 
+                    FROM san_phams
+                    INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                    WHERE san_phams.id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
-
             return $stmt->fetch();
         } catch (Exception $e) {
-            echo 'Lỗi' . $e->getMessage();
+            error_log('Lỗi: ' . $e->getMessage());
+            return false;
         }
     }
 
-
     public function getListAnhSanPham($id)
     {
-
         try {
-            $sql = 'SELECT * FROM hinh_anh_san_phams WHERE san_pham_id = :id';
-
+            $sql = 'SELECT * FROM hinh_anhs INNER JOIN san_phams as p ON hinh_anhs.san_pham_id = p.id WHERE hinh_anhs.san_pham_id = :id';
             $stmt = $this->conn->prepare($sql);
-
             $stmt->execute([':id' => $id]);
-
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo 'Lỗi' . $e->getMessage();
+            error_log('Lỗi: ' . $e->getMessage());
+            return false;
         }
     }
 
@@ -66,32 +60,29 @@ class SanPham
                     FROM binh_luans
                     INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
                     WHERE binh_luans.san_pham_id = :id';
-
             $stmt = $this->conn->prepare($sql);
-
             $stmt->execute([':id' => $id]);
-
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo 'Lỗi: ' . $e->getMessage();
+            error_log('Lỗi: ' . $e->getMessage());
+            return false;
         }
     }
 
     public function getListSanPhamDanhMuc($danh_muc_id)
     {
         try {
+            // Use parameterized query to prevent SQL injection
             $sql = 'SELECT san_phams.*, danh_mucs.ten_danh_muc
-            FROM san_phams
-            INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
-            WHERE san_phams.danh_muc_id = '. $danh_muc_id;
-
+                    FROM san_phams
+                    INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                    WHERE san_phams.danh_muc_id = :danh_muc_id';
             $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute();
-
+            $stmt->execute([':danh_muc_id' => $danh_muc_id]);
             return $stmt->fetchAll();
         } catch (Exception $e) {
-            echo 'Lỗi' . $e->getMessage();
+            error_log('Lỗi: ' . $e->getMessage());
+            return false;
         }
     }
 }

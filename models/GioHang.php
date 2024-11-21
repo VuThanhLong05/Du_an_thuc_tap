@@ -26,13 +26,13 @@ class GioHang
     public function getDetailGioHang($id)
     {
         try {
-            $sql = 'SELECT chi_tiet_gio_hangs.*, san_phams.ten_san_pham ,
+            $sql = 'SELECT gio_hangs.*, san_phams.ten_san_pham ,
                                                  san_phams.hinh_anh,
                                                  san_phams.gia_san_pham, 
                                                  san_phams.gia_khuyen_mai
-            FROM chi_tiet_gio_hangs
-            INNER JOIN san_phams ON chi_tiet_gio_hangs.san_pham_id = san_phams.id
-            WHERE chi_tiet_gio_hangs.gio_hang_id = :gio_hang_id';
+            FROM gio_hangs
+            INNER JOIN san_phams ON gio_hangs.san_pham_id = san_phams.id
+            WHERE gio_hangs.gio_hang_id = :gio_hang_id';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -62,7 +62,7 @@ class GioHang
     public function updateSoLuong($gio_hang_id, $san_pham_id, $so_luong)
     {
         try {
-            $sql = 'UPDATE chi_tiet_gio_hangs
+            $sql = 'UPDATE gio_hangs
                     SET so_luong = :so_luong
                     WHERE gio_hang_id = :gio_hang_id
                     AND san_pham_id = :san_pham_id';
@@ -84,7 +84,7 @@ class GioHang
     public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong)
     {
         try {
-            $sql = 'INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong) 
+            $sql = 'INSERT INTO gio_hangs (gio_hang_id, san_pham_id, so_luong) 
             VALUE (:gio_hang_id, :san_pham_id, :so_luong)';
 
             $stmt = $this->conn->prepare($sql);

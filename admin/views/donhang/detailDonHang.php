@@ -19,7 +19,7 @@
                 <div class="col-sm-10">
                     <h1>Quản lý danh sách đơn hàng - Đơn hàng: <?= $donHang['ma_don_hang'] ?> </h1>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                     <form action="" method="post">
                         <select name="" id="" class="">
                             <?php foreach ($listTrangThaiDonHang as $key => $trangThai): ?>
@@ -31,7 +31,7 @@
                             <?php endforeach; ?>
                         </select>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -178,7 +178,7 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
 
-      
+
     </section>
     <!-- /.content -->
 </div>
@@ -190,7 +190,7 @@
 
 <!-- Page specific script -->
 <script>
-    $(function () {
+    $(function() {
         $("#example1").DataTable({
             "responsive": true,
             "lengthChange": false,

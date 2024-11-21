@@ -8,17 +8,17 @@ require_once '../commons/function.php'; // Correct path to function.php
 
 // Require toàn bộ file Controllers
 require_once './controllers/AdminKhuyenMaiController.php';
-require_once './controllers/AdminBaoCaoThongKeController.php';
+require_once './controllers/AdminThongKeController.php';
 require_once './controllers/AdminDanhMucController.php';
 require_once './controllers/AdminBaiVietController.php';
 require_once './controllers/AdminTrangThaiDonHangController.php';
 require_once './controllers/AdminBannerController.php';
 require_once './controllers/AdminSanPhamController.php';
+require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminTaiKhoanController.php';
 require_once './controllers/AdminBinhLuanController.php';
-require_once './controllers/AdminLienHeController.php';
-require_once './controllers/AdminDonHangController.php';
 require_once './controllers/AdminDanhGiaController.php';
+require_once './controllers/AdminLienHeController.php';
 
 
 // Require toàn bộ file Models
@@ -30,9 +30,11 @@ require_once './models/AdminBanner.php';
 require_once './models/AdminSanPham.php';
 require_once './models/AdminTaiKhoan.php';
 require_once './models/AdminBinhLuan.php';
+require_once './models/AdminDanhGia.php';
 require_once './models/AdminLienHe.php';
 require_once './models/AdminDonHang.php';
-require_once './models/AdminDanhGia.php';
+require_once './models/AdminThongKe.php';
+
 
 
 // Route
@@ -43,7 +45,7 @@ if ($act !== 'check-log-admin' && $act !== 'logout-admin') {
 }
 
 match ($act) {
-    '/' => (new AdminBaoCaoThongKeController())->home(),
+    '/' => (new AdminThongKeController())->home(),
 
     //danh mục
 
@@ -133,6 +135,7 @@ match ($act) {
     'logout-admin' => (new AdminTaiKhoanController)->logout(),
 
     // Bình luận
+    'update-trang-thai-binh-luan' => (new AdminSanPhamController())->updateTrangThaiBinhLuan(),
     'updata-trang-thai-binh-luan' => (new AdminBinhLuanController())->updataTrangThaiBinhLuan(),
     'binh-luan' => (new AdminBinhLuanController())->danhSachBinhLuan(),
     'delete-binh-luan' => (new AdminBinhLuanController())->xoaBinhLuan(),
@@ -148,7 +151,6 @@ match ($act) {
     'sua-don-hang' => (new AdminDonHangController())->postEditDonHang(),
     'chi-tiet-don-hang' => (new AdminDonHangController())->detailDonHang(),
 
-    //đánh giá
-    "danh-gia"  => (new AdminDanhGiaController())->danhSachDanhGia(),
-    "update-trang-thai-danh-gia"  => (new AdminDanhGiaController())->updateTrangThaiDanhGia(),
+    // dánh gía
+    "danh-gia" => (new AdminDanhGiaController())->danhSachDanhGia(),
 };
