@@ -27,11 +27,12 @@ class AdminBaiViet
         $tieu_de,
         $noi_dung,
         $ngay_dang,
-        $trang_thai
+        $trang_thai,
+        $hinh_anh
     ) {
         try {
-            $sql = 'INSERT INTO bai_viets (tieu_de, noi_dung, ngay_dang, trang_thai)
-                VALUES (:tieu_de, :noi_dung, :ngay_dang, :trang_thai)';
+            $sql = 'INSERT INTO bai_viets (tieu_de, noi_dung, ngay_dang, trang_thai, hinh_anh)
+                VALUES (:tieu_de, :noi_dung, :ngay_dang, :trang_thai, :hinh_anh)';
 
             $stmt = $this->conn->prepare($sql);
 
@@ -40,6 +41,7 @@ class AdminBaiViet
                 ':noi_dung' => $noi_dung,
                 ':ngay_dang' => $ngay_dang,
                 ':trang_thai' => $trang_thai,
+                ':hinh_anh' => $hinh_anh,
             ]);
 
             return true;
@@ -71,7 +73,8 @@ class AdminBaiViet
         $tieu_de,
         $noi_dung,
         $ngay_dang,
-        $trang_thai
+        $trang_thai,
+        $hinh_anh
     ) {
         try {
             $sql = 'UPDATE bai_viets 
@@ -79,7 +82,8 @@ class AdminBaiViet
                     tieu_de = :tieu_de, 
                     noi_dung = :noi_dung,
                     ngay_dang = :ngay_dang, 
-                    trang_thai = :trang_thai  
+                    trang_thai = :trang_thai,
+                    hinh_anh = :hinh_anh
                 WHERE id = :id';
             // var_dump($sql); die();
 
@@ -90,6 +94,7 @@ class AdminBaiViet
                 ':noi_dung' => $noi_dung,
                 ':ngay_dang' => $ngay_dang,
                 ':trang_thai' => $trang_thai,
+                ':hinh_anh' => $hinh_anh,
                 ':id' => $id
 
             ]);

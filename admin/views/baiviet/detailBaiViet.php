@@ -45,8 +45,10 @@
                     <div class="col-12">
                         <h3 class="my-3">Tiêu đề bài viết: <?= $baiViet['tieu_de'] ?></h3>
                         <hr>
+                        <!-- <h4 class="mt-3">Nội dung: </h4> <br> -->
+                        <img style="width: 30%;" src="<?= BASE_URL . $baiViet['hinh_anh'] ?>" alt="">
                         <h4 class="mt-3">Nội dung: </h4> <br>
-                        <textarea style="width: 100%;" name="" id=""><?= $baiViet['noi_dung'] ?></textarea>
+                        <textarea class="form-control" style="width: 100%;" name="" id=""><?= $baiViet['noi_dung'] ?></textarea>
                         <h4 class="mt-3">Ngày đăng: <small><?= formatDate($baiViet['ngay_dang']) ?></small></h4>
                         <h4 class="mt-3">Trạng thái: <small><?= $baiViet['trang_thai'] == 1 ? 'Hiện' : 'Ẩn' ?></small></h4>
 

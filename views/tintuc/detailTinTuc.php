@@ -14,9 +14,9 @@
 
     <body>
         <div class="container">
-            <?php if (!empty($post['anh'])): ?>
+            <?php if (!empty($post['hinh_anh'])): ?>
                 <div class="image-container">
-                    <img src="<?= htmlspecialchars($post['anh']) ?>" alt="<?= htmlspecialchars($post['tieu_de']) ?>"
+                    <img src="<?= htmlspecialchars($post['hinh_anh']) ?>" alt="<?= htmlspecialchars($post['tieu_de']) ?>"
                         class="news-image">
                     <div class="conten">
                         <h1><?= htmlspecialchars($post['tieu_de']) ?></h1>

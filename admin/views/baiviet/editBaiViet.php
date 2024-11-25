@@ -34,7 +34,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="<?= BASE_URL_ADMIN . '?act=sua-bai-viet' ?>" method="post">
+                        <form action="<?= BASE_URL_ADMIN . '?act=sua-bai-viet' ?>" method="post" enctype="multipart/form-data">
                         <input type="text" name="id" id="" value="<?= $baiViet['id'] ?>" hidden>
                             <div class="card-body">
                                 <div class="form-group">
@@ -43,6 +43,15 @@
 
                                     <?php if (isset($_SESSION['errors']['tieu_de'])) { ?>
                                         <p class="text-danger"><?= $_SESSION['errors']['tieu_de']; ?></p>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="form-group col-12">
+                                    <label>Hình ảnh bài viết</label> <br>
+                                    <img style="width: 30%;" src="<?= BASE_URL . $baiViet['hinh_anh'] ?>" alt=""> <br> <br>
+                                    <input type="file" class="form-control" name="hinh_anh">
+                                    <?php if (isset($_SESSION['errors']['hinh_anh'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['hinh_anh']; ?></p>
                                     <?php } ?>
                                 </div>
 

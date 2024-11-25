@@ -11,7 +11,7 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="<?php BASE_URL ?>"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tin Tức </li>
                             </ul>
                         </nav>
@@ -35,7 +35,9 @@
             <?php if (!empty($news)): ?>
                 <?php foreach ($news as $item): ?>
                     <div class="news-item">
-                        <h4><?= htmlspecialchars($item['tieu_de']) ?></h4>
+                        <h4><?= htmlspecialchars($item['tieu_de']) ?></h4> <br>
+                        <img style="width: 10%;" src="<?= htmlspecialchars($item['hinh_anh']) ?>" alt="<?= htmlspecialchars($post['tieu_de']) ?>"
+                        class="news-image"> <br> <br>
                         <p><?= nl2br(htmlspecialchars(substr($item['noi_dung'], 0, 200))) ?>...</p>
                         <p><small>Ngày đăng: <?= htmlspecialchars($item['ngay_dang']) ?></small></p>
                         <a href="index.php?act=chi-tiet-tin-tuc&id=<?= htmlspecialchars($item['id']) ?>" class="detail-btn">Xem
