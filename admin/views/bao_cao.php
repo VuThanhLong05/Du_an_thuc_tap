@@ -21,7 +21,7 @@
       font-weight: bold;
       text-align: center;
       margin-bottom: 20px;
-      color: #007bff;
+      color: #283762;
     }
 
     .card-header {
@@ -32,7 +32,7 @@
     }
 
     .table th {
-      background-color: #007bff;
+      background-color: #41486e;
       color: white;
     }
 
@@ -64,7 +64,7 @@
             <div class="card">
               <div class="card-header">Tổng số đơn hàng</div>
               <div class="card-body text-center">
-                <h3 class="text-primary"><?= $thongKe['tong_so_don_hang']; ?></h3>
+                <h3 id="totalOrders" class="text-primary">0</h3>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
             <div class="card">
               <div class="card-header">Tổng doanh thu</div>
               <div class="card-body text-center">
-                <h3 class="text-success"><?= formatprice($thongKe['tong_tien']); ?> VND</h3>
+                <h3 id="totalRevenue" class="text-success">0 VND</h3>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
             <div class="card">
               <div class="card-header">Chi tiết đơn hàng theo trạng thái</div>
               <div class="card-body">
-                <table class="table table-bordered table-hover">
+                <table class="table  table-hover">
                   <thead>
                     <tr>
                       <th>Trạng thái</th>
@@ -153,8 +153,8 @@
                     <tr>
                       <th>Mã đơn hàng</th>
                       <th>Người nhận</th>
-                      <!-- <th>Email</th> -->
-                      <th>SĐT</th>
+                      <th>Email</th>
+                      <!-- <th>SĐT</th> -->
                       <th>Ngày đặt</th>
                       <th>Tổng tiền</th>
                     </tr>
@@ -164,8 +164,8 @@
                       <tr>
                         <td><?= $donHang['ma_don_hang']; ?></td>
                         <td><?= $donHang['ten_nguoi_nhan']; ?></td>
-                        <!-- <td><?= $donHang['email_nguoi_nhan']; ?></td> -->
-                        <td><?= $donHang['sdt_nguoi_nhan']; ?></td>
+                        <td><?= $donHang['email_nguoi_nhan']; ?></td>
+                        <!-- <td><?= $donHang['sdt_nguoi_nhan']; ?></td> -->
                         <td><?= $donHang['ngay_dat']; ?></td>
                         <td><?= formatprice($donHang['tong_tien']); ?> VND</td>
                       </tr>
@@ -176,6 +176,42 @@
             </div>
           </div>
         </div>
+
+        <!-- Top 10 đơn hàng có danh thu cao nhất -->
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">Top đơn hàng có danh thu cao nhất</div>
+              <div class="card-body table-responsive">
+                <table class="table table-bordered table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Mã đơn hàng</th>
+                      <th>Người nhận</th>
+                      <th>Email</th>
+                      <!-- <th>SĐT</th> -->
+                      <th>Ngày đặt</th>
+                      <th>Tổng tiền</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php foreach ($topDonHangTheoDanhThu as $donHangTop) : ?>
+                      <tr>
+                        <td><?= $donHangTop['ma_don_hang']; ?></td>
+                        <td><?= $donHangTop['ten_nguoi_nhan']; ?></td>
+                        <td><?= $donHangTop['email_nguoi_nhan']; ?></td>
+                        <!-- <td><?= $donHangTop['sdt_nguoi_nhan']; ?></td> -->
+                        <td><?= $donHangTop['ngay_dat']; ?></td>
+                        <td><?= formatprice($donHangTop['tong_tien']); ?> VND</td>
+                      </tr>
+                    <?php endforeach; ?>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   </div>
@@ -261,6 +297,38 @@
       lineColors: ['green'],
       xLabelAngle: 45
     });
+
+
+    // Hàm định dạng tiền, không thêm đơn vị tiền tệ
+    function formatPrice(value) {
+      return value.toLocaleString('vi-VN'); // Chỉ định dạng số với dấu phẩy
+    }
+
+    // Hàm tạo hiệu ứng tăng số
+    function animateNumber(id, start, end, duration, appendText = '') {
+      const element = document.getElementById(id);
+      const range = end - start;
+      let current = start;
+      const increment = range / (duration / 50);
+
+      const timer = setInterval(() => {
+        current += increment;
+        if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+          current = end;
+          clearInterval(timer);
+        }
+        // Hiển thị giá trị định dạng và thêm text (nếu có)
+        element.textContent = formatPrice(Math.round(current)) + appendText;
+      }, 50);
+    }
+
+    // Lấy dữ liệu từ PHP
+    const totalOrders = <?= $thongKe['tong_so_don_hang']; ?>;
+    const totalRevenue = <?= $thongKe['tong_tien']; ?>;
+
+    // Hiển thị hiệu ứng tăng số
+    animateNumber('totalOrders', 0, totalOrders, 2500); // 2.5 giây
+    animateNumber('totalRevenue', 0, totalRevenue, 2500, ' VND'); // Thêm "VND" ở cuối
   </script>
 </body>
 
