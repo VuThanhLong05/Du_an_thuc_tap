@@ -4,7 +4,7 @@ class AdminTrangThaiDonHang {
 
     // Kết nối với cơ sở dữ liệu
     public function __construct() {
-        $this->db = new PDO("mysql:host=localhost;dbname=duan_1", "root", "");
+        $this->db = new PDO("mysql:host=localhost;dbname=du_an_1", "root", "");
     }
 
     // Lấy tất cả trạng thái đơn hàng
