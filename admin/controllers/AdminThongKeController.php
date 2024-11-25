@@ -15,6 +15,7 @@ class AdminThongKeController
         $donHangPhamMoiNhat = $this->modelThongKe->getDonHangMoiNhat();  // Lấy 5 sản phẩm mới nhất
         $baoCaoTrangThai = $this->modelThongKe->getBaoCaoTrangThai(); // Lấy báo cáo trạng thái
         $doanhThuTungNgay = $this->modelThongKe->getDoanhThuTungNgay(); // Lấy doanh thu từng ngày
+        $topDonHangTheoDanhThu = $this->modelThongKe->getTopDoanhThuDonHang();
 
         // Truyền tất cả dữ liệu vào view
         require_once './views/bao_cao.php';

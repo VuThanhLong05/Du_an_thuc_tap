@@ -24,7 +24,7 @@ class HomeController
     {
 
         $listSanPham = $this->modelSanPham->getAllSanPham();
-
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         require_once './views/sanpham/listSanPham.php';
     }
 
@@ -43,6 +43,25 @@ class HomeController
             exit();
         }
     }
+
+    public function timKiemSanPham()
+    {
+        // Lấy các tham số từ GET
+        $danhMuc = $_GET['danh_muc'] ?? 'all';
+        $mucGia = $_GET['muc_gia'] ?? 'all';
+        $sapXep = $_GET['sap_xep'] ?? 'asc';
+
+        // Gọi model để lấy danh sách sản phẩm
+        $listSanPham = $this->modelSanPham->getProductInSearch(null, $danhMuc, $mucGia, $sapXep);
+
+        // Lấy danh sách danh mục để hiển thị lại form
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+
+        // Render giao diện với kết quả tìm kiếm
+        require_once './views/sanpham/listSanPham.php';
+    }
+
+
 
     // Form đăng nhập
     public function formLogin()
@@ -138,6 +157,8 @@ class HomeController
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_SESSION['user_client'])) {
                 $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
+                var_dump($mail);
+                die();
                 $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
 
                 if (!$gioHang) {

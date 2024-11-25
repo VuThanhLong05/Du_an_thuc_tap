@@ -1,5 +1,4 @@
 <?php require_once 'views/layout/header.php'; ?>
-
 <?php require_once 'views/layout/menu.php'; ?>
 
 <main>
@@ -12,7 +11,7 @@
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
-                                <li class="breadcrumb-item active" aria-current="page">login-Register</li>
+                                <li class="breadcrumb-item active" aria-current="page">Thêm tài khoản</li>
                             </ul>
                         </nav>
                     </div>
@@ -20,79 +19,73 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12
-    ">
+    <!-- breadcrumb area end -->
 
+    <!-- form area start -->
+    <div class="container">
         <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Thêm tài khoản</h3>
-                            </div>
-                            <!-- /.card-header -->
-                            <!-- form start -->
-                            <form action="<?= BASE_URL . '?act=them' ?>" method="post">
-
-                                <div class=" row card-body">
-
-
-                                    <div class="form-group col-12">
-                                        <label>Id</label>
-                                        <input type="id" class="form-control" name="id" placeholder="Nhập email">
-                                        <?php if (isset($_SESSION['error']['id'])) { ?>
-                                            <p class="text-danger"><?= $_SESSION['error']['id']; ?></p>
-                                        <?php } ?>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label>Name</label>
-                                        <input type="email" class="form-control" name="name" placeholder="Nhập email">
-                                        <?php if (isset($_SESSION['error']['ho_ten'])) { ?>
-                                            <p class="text-danger"><?= $_SESSION['error']['ho_ten']; ?></p>
-                                        <?php } ?>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control" name="email" placeholder="Nhập email">
-                                        <?php if (isset($_SESSION['error']['email'])) { ?>
-                                            <p class="text-danger"><?= $_SESSION['error']['email']; ?></p>
-                                        <?php } ?>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label>PassWord</label>
-                                        <input type="text" class="form-control" name="mat_khau"
-                                            placeholder="Nhập mật khẩu ">
-                                        <?php if (isset($_SESSION['error']['mat_khau'])) { ?>
-                                            <p class="text-danger"><?= $_SESSION['error']['mat_khau']; ?></p>
-                                        <?php } ?>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label>Vai trò</label>
-                                        <input type="text" class="form-control" name="vai_tro"
-                                            placeholder="Nhập mật khẩu ">
-                                        <?php if (isset($_SESSION['error']['vai_tro'])) { ?>
-                                            <p class="text-danger"><?= $_SESSION['error']['vai_tro']; ?></p>
-                                        <?php } ?>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Thêm tài khoản</h3>
+                        </div>
+                        <!-- form start -->
+                        <form action="<?= BASE_URL . '?act=them' ?>" method="post">
+                            <div class="card-body">
+                                <!-- Tên -->
+                                <div class="form-group">
+                                    <label for="ho_ten">Tên:</label>
+                                    <input type="text" class="form-control" id="ho_ten" name="ho_ten"
+                                        placeholder="Nhập họ tên" required>
+                                    <?= isset($_SESSION['error']['ho_ten']) ? '<p class="text-danger">' . $_SESSION['error']['ho_ten'] . '</p>' : '' ?>
+                                </div>
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" class="form-control" name="email" placeholder="Nhập email"
+                                        required>
+                                    <?php if (isset($_SESSION['error']['email'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['email']; ?></p>
+                                    <?php endif; ?>
                                 </div>
 
-                            </form>
-                        </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại:</label>
+                                    <input type="tel" class="form-control" name="so_dien_thoai"
+                                        placeholder="Nhập số điện thoại" required>
+                                    <?php if (isset($_SESSION['error']['so_dien_thoai'])): ?>
+                                        <p class="text-danger"><?= $_SESSION['error']['so_dien_thoai']; ?></p>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php
+                                // Xóa lỗi sau khi hiển thị
+                                unset($_SESSION['error']);
+                                ?>
+
+                                <!-- Mật khẩu -->
+                                <div class="form-group">
+                                    <label for="mat_khau">Mật khẩu:</label>
+                                    <input type="password" class="form-control" id="mat_khau" name="mat_khau"
+                                        placeholder="Nhập mật khẩu" required>
+                                    <?= isset($_SESSION['error']['mat_khau']) ? '<p class="text-danger">' . $_SESSION['error']['mat_khau'] . '</p>' : '' ?>
+                                </div>
+                            </div>
+                            <!-- Submit -->
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Thêm tài khoản</button>
+                                <button type="button" class="btn btn-secondary" onclick="location.reload()">Làm
+                                    mới</button>
+
+                            </div>
+                        </form>
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
             </div>
-            <!-- /.container-fluid -->
         </section>
-        <!-- /.card -->
-
     </div>
+    <!-- form area end -->
+</main>
 
-    <!-- offcanvas mini cart end -->
-
-    <?php require_once 'views/layout/footer.php'; ?>
+<?php require_once 'views/layout/footer.php'; ?>

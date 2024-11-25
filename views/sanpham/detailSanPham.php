@@ -84,6 +84,7 @@
                                             <h6 class="option-title mr-3">Số lượng:</h6>
                                             <div class="quantity">
                                                 <input type="hidden" name="san_pham_id" value="<?= $thongTinSanPham['id'] ?>">
+                                                <!-- <?php var_dump($thongTinSanPham['id']); ?> -->
                                                 <div class="pro-qty d-flex">
                                                     <input type="text" value="1" name="so_luong" class="form-control">
                                                 </div>
@@ -132,17 +133,33 @@
                                                 </div>
                                             <?php endforeach ?>
 
-                                            <form action="#" class="review-form">
+
+                                            <?php
+                                            // Kiểm tra xem thông tin sản phẩm đã được truyền vào chưa
+                                            if (isset($thongTinSanPham)) {
+                                                $san_pham_id = $thongTinSanPham['id']; // Lấy ID sản phẩm từ dữ liệu sản phẩm
+                                            } else {
+                                                echo "Không tìm thấy thông tin sản phẩm.";
+                                                exit;
+                                            }
+                                            ?>
+
+                                            <!-- Form gửi bình luận -->
+                                            <form action="<?= BASE_URL . '?act=form-them-binh-luan' ?>" method="post" class="review-form">
+                                                <input type="hidden" name="san_pham_id" value="<?= $san_pham_id ?>"> <!-- ID sản phẩm -->
                                                 <div class="form-group row">
                                                     <div class="col">
                                                         <label class="col-form-label"><span class="text-danger">*</span> Nội dung bình luận</label>
-                                                        <textarea class="form-control" required></textarea>
+                                                        <textarea class="form-control" name="noi_dung" required></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="buttons">
                                                     <button class="btn btn-sqr" type="submit">Bình luận</button>
                                                 </div>
                                             </form>
+
+
+
                                         </div>
                                     </div>
                                 </div>

@@ -92,9 +92,8 @@ function checkLoginAdmin()
     }
 }
 
-function formatprice($price) {
+function formatprice($price)
+{
     // Định dạng số tiền với dấu phân cách hàng nghìn và thêm '₫' ở cuối
-    return number_format($price, 0, ',', '.') ;
+    return number_format($price, 0, ',', '.');
 }
-
-    

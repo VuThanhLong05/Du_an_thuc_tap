@@ -50,8 +50,9 @@
                                         </li>
 
                                         <li><a href="<?= BASE_URL . '?act=gioi-thieu' ?>">Giới thiệu</a></li>
-                                        <li><a href="<?= BASE_URL . '?act=tin-tuc' ?>">Tin Tức</a></li>
+                                        <li><a href="<?= BASE_URL . '?act=danh-sach-tin-tuc' ?>">Tin Tức</a></li>
                                         <li><a href="<?= BASE_URL . '?act=form-them-lien-he' ?>">Liên hệ</a></li>
+                                        <li><a href="<?= BASE_URL . '?act=danh-sach-khuyen-mai' ?>">Khuyến mãi</a></li>
 
                                     </ul>
                                 </nav>
@@ -96,6 +97,7 @@
 
                                                 <!-- <li><a href="login-register.html">Đăng kí</a></li> -->
                                                 <li><a href="my-account.html">Tài khoản</a></li>
+                                                <li><a href="<?= BASE_URL_ADMIN . '?' ?>">Quản lý admin</a></li>
                                                 <li><a href="<?= BASE_URL . '?act=logout' ?>">Đăng xuất</a></li>
                                             <?php } ?>
                                         </ul>

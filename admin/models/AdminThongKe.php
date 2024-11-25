@@ -58,4 +58,36 @@ class AdminThongKe
             echo 'Lỗi: ' . $e->getMessage();
         }
     }
+
+    public function getTopDoanhThuDonHang()
+    {
+        try {
+            $sql = "SELECT 
+                    d.id,
+                    d.ma_don_hang, 
+                    d.ten_nguoi_nhan, 
+                    d.email_nguoi_nhan, 
+                    d.sdt_nguoi_nhan, 
+                    d.dia_chi_nguoi_nhan, 
+                    d.ngay_dat, 
+                    d.tong_tien, 
+                    t.ten_trang_thai 
+                FROM 
+                    don_hangs AS d
+                JOIN 
+                    trang_thai_don_hangs AS t 
+                ON 
+                    d.trang_thai_id = t.id
+                WHERE 
+                    t.ten_trang_thai = 'Thành công'
+                ORDER BY 
+                    d.tong_tien DESC
+                LIMIT 10";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC); // Lấy toàn bộ dữ liệu
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
+    }
 }
