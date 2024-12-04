@@ -84,7 +84,6 @@
                                             <h6 class="option-title mr-3">Số lượng:</h6>
                                             <div class="quantity">
                                                 <input type="hidden" name="san_pham_id" value="<?= $thongTinSanPham['id'] ?>">
-                                                <!-- <?php var_dump($thongTinSanPham['id']); ?> -->
                                                 <div class="pro-qty d-flex">
                                                     <input type="text" value="1" name="so_luong" class="form-control">
                                                 </div>

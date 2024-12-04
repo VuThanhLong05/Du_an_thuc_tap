@@ -49,6 +49,17 @@ function deleteFile($file)
     }
 }
 
+function xoaKhuyenMai()
+{
+    if (isset($_SESSION['coupon_code'])) {
+        // var_dump($_SESSION['coupon_code']);
+        // die();
+        unset($_SESSION['coupon_code']);
+        unset($_SESSION['discount']);
+        // session_destroy();
+    }
+}
+
 // Xóa session sau khi load trang
 function deleteSessionError()
 {
@@ -96,4 +107,35 @@ function formatprice($price)
 {
     // Định dạng số tiền với dấu phân cách hàng nghìn và thêm '₫' ở cuối
     return number_format($price, 0, ',', '.');
+}
+
+function checkDiscountCode($coupon_code)
+{
+    global $conn;
+
+    // Chuẩn bị truy vấn để kiểm tra mã giảm giá hợp lệ
+    $sql = "SELECT * FROM khuyen_mais 
+            WHERE ma_khuyen_mai = ? 
+            AND trang_thai = 1 
+            AND NOW() BETWEEN ngay_bat_dau AND ngay_ket_thuc";
+
+    $stmt = mysqli_prepare($conn, $sql);
+    if ($stmt) {
+        // Gán giá trị cho tham số
+        mysqli_stmt_bind_param($stmt, "s", $coupon_code);
+
+        // Thực thi truy vấn 
+        mysqli_stmt_execute($stmt);
+
+        // Lấy kết quả
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Kiểm tra nếu có mã hợp lệ
+        if ($row = mysqli_fetch_assoc($result)) {
+            return $row;
+        }
+    }
+
+    // Không tìm thấy hoặc lỗi
+    return false;
 }

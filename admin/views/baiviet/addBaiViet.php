@@ -68,6 +68,7 @@
                                     <?php } ?>
                                 </div>
 
+
                                 <div class="form-group col-12">
                                     <label>Trạng thái</label>
                                     <select class="form-control" name="trang_thai" id="exampleFormControlSelectl">
@@ -86,7 +87,7 @@
                                 </div>
                         </form>
                     </div>
-            </div>
+                </div>
                 <!-- /.col -->
             </div>
             <!-- /.row -->

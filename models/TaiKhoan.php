@@ -16,6 +16,22 @@ class TaiKhoan
         return $stmt->fetchColumn() > 0;
     }
 
+    public function isEmailOrPhoneExists($field, $value, $excludeId = null)
+    {
+        $sql = "SELECT COUNT(*) as count FROM tai_khoans WHERE $field = :value";
+        $params = [':value' => $value];
+
+        if ($excludeId !== null) {
+            $sql .= " AND id != :exclude_id";
+            $params[':exclude_id'] = $excludeId;
+        }
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute($params);
+        $result = $stmt->fetch();
+
+        return $result['count'] > 0;
+    }
     public function isPhoneExists($so_dien_thoai)
     {
         $sql = "SELECT COUNT(*) FROM tai_khoans WHERE so_dien_thoai = :so_dien_thoai";
@@ -123,19 +139,7 @@ class TaiKhoan
         }
     }
 
-    //////////
 
-    //     public function getDetailTaiKhoan($email)
-    // {
-    //     try {
-    //         $sql = 'SELECT * FROM tai_khoans WHERE email = :email';
-    //         $stmt = $this->conn->prepare($sql);
-    //         $stmt->execute([':email' => $email]);
-    //         return $stmt->fetch();
-    //     } catch (Exception $e) {
-    //         echo 'Lỗi: ' . $e->getMessage();
-    //     }
-    // }
     public function getDetailTaiKhoan($id)
     {
         try {
@@ -178,6 +182,7 @@ class TaiKhoan
             return false;
         }
     }
+
 
 
     ///////////////

@@ -35,7 +35,7 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form action="<?= BASE_URL_ADMIN . '?act=sua-bai-viet' ?>" method="post" enctype="multipart/form-data">
-                        <input type="text" name="id" id="" value="<?= $baiViet['id'] ?>" hidden>
+                            <input type="text" name="id" id="" value="<?= $baiViet['id'] ?>" hidden>
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Tiêu đề bài viết</label>

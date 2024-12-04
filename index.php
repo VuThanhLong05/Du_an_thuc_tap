@@ -12,7 +12,10 @@ require_once './controllers/LienHeController.php';
 require_once './controllers/KhuyenMaiController.php';
 require_once './controllers/BinhLuanController.php';
 require_once './controllers/TinTucController.php';
-// require_once '';
+require_once './controllers/DonHangController.php';
+require_once './controllers/GioHangController.php';
+require_once './controllers/ThanhToanController.php';
+require_once './controllers/ThanhToanMomoController.php';
 
 // require_once './views/sanpham/search.php';
 
@@ -25,6 +28,10 @@ require_once './models/LienHe.php';
 require_once './models/KhuyenMai.php';
 require_once './models/BinhLuan.php';
 require_once './models/TinTuc.php';
+require_once './models/DonHang.php';
+require_once './models/GioHang.php';
+require_once './models/ThanhToanMomo.php';
+// require_once './models/Coupon.php';
 
 
 // Route
@@ -40,16 +47,21 @@ match ($act) {
     // sản phẩm
     'chi-tiet-san-pham' => (new HomeController())->chiTietSanPham(),
     'danh-sach-san-pham' => (new HomeController())->danhSachSanPham(),
-    'them-gio-hang' => (new HomeController())->addGioHang(),
-    'gio-hang' => (new HomeController())->gioHang(),
+
 
     // đăng ký nhập
     'login' => (new HomeController())->formLogin(),
     'check-login' => (new HomeController())->postLogin(),
     'logout' => (new HomeController())->Logout(),
+
+    // tài khoản
     'list-tai-khoan' => (new TaiKhoanController())->danhSach(),
     'form-them' => (new TaiKhoanController())->formAdd(),
     'them' => (new TaiKhoanController())->postAdd(),
+    /// quản lý tài khoản cá nhân 
+    'detail-tai-khoan' => (new TaiKhoanController())->detailTaiKhoan(),
+    'update-tai-khoan' => (new TaiKhoanController())->updateTaiKhoan(),
+    // 'sua-mat-khau-ca-nhan-quan-tri' => (new TaiKhoanController())->postEditMatKhauCaNhan(),
 
     // Quản lý liên hệ
     // 'lien-he' => (new LienHeController())->danhSach(),
@@ -58,6 +70,7 @@ match ($act) {
 
     // Khuyến mãi
     'danh-sach-khuyen-mai' => (new KhuyenMaiController())->danhSachKhuyenMai(),
+
 
     // Bình luận
     'form-them-binh-luan' => (new BinhLuanController())->addBinhLuan(),
@@ -68,4 +81,24 @@ match ($act) {
 
     // search
     'tim-kiem' => (new HomeController())->timKiemSanPham(),
+
+    // đơn hàng
+    'don-hang' => (new DonHangController())->donHang(),
+    'chi-tiet-don-hang' => (new DonHangController())->chiTietDonHang(),
+    'huy-don-hang' => (new DonHangController())->huyDonHang(),
+    'da-nhan-don-hang' => (new DonHangController())->daNhanDonHang(),
+
+    // Giỏ hàng
+    'them-gio-hang' => (new GioHangController())->addGioHang(),
+    'gio-hang' => (new GioHangController())->gioHang(),
+    'xoa-san-pham' => (new GioHangController())->xoaSanPham(),
+    'lam-moi-gio-hang' => (new GioHangController())->xoaGioHang(),
+    'cap-nhat-gio-hang' => (new GioHangController())->capNhatGioHang(),
+
+    // Thanh toán
+    'thanh-toan' => (new ThanhToanController())->thanhToan(),
+    'xu-ly-thanh-toan' => (new ThanhToanController())->postThanhToan(),
+    // 'thanh-toan-momo' => (new ThanhToanController())->thanhToanMomo(),
+    'thanh-toan-thanh-cong' => (new ThanhToanController())->thanhToanThanhCong(),
+    'apply-coupon' => (new KhuyenMaiController())->applyCoupon(),
 };

@@ -35,6 +35,17 @@
     <!-- main style css -->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <script>
+        document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === "hidden") {
+                // Khi tab chuyển sang trạng thái ẩn
+                console.log("Tab bị ẩn");
+            } else if (document.visibilityState === "visible") {
+                // Khi tab chuyển sang trạng thái hiển thị
+                location.reload(); // Tải lại trang
+            }
+        });
+    </script>
 </head>
 
 <body>

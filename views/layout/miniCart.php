@@ -7,25 +7,13 @@
                 <i class="pe-7s-close"></i>
             </div>
             <div class="minicart-content-box">
+
+
+
+
                 <div class="minicart-item-wrapper">
                     <ul>
-                        <li class="minicart-item">
-                            <div class="minicart-thumb">
-                                <a href="product-details.html">
-                                    <img src="assets/img/cart/cart-1.jpg" alt="product">
-                                </a>
-                            </div>
-                            <div class="minicart-content">
-                                <h3 class="product-name">
-                                    <a href="product-details.html">Dozen White Botanical Linen Dinner Napkins</a>
-                                </h3>
-                                <p>
-                                    <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                    <span class="cart-price">$100.00</span>
-                                </p>
-                            </div>
-                            <button class="minicart-remove"><i class="pe-7s-close"></i></button>
-                        </li>
+
                         <li class="minicart-item">
                             <div class="minicart-thumb">
                                 <a href="product-details.html">

@@ -41,7 +41,7 @@
                   <tr>
                     <th>STT</th>
                     <th>Tiêu đề</th>
-                    <th>Hình ảnh bài viết</th>
+                    <th>Hình ảnh</th>
                     <th>Ngày đăng</th>
                     <th>Thao tác</th>
                   </tr>
@@ -51,7 +51,7 @@
                     <tr>
                       <td><?= $key + 1 ?></td>
                       <td><?= $baiViet['tieu_de'] ?></td>
-                      <td><img src="<?= BASE_URL . $baiViet['hinh_anh'] ?>" style="width: 100px"></td>
+                      <td><img src="<?= BASE_URL . $baiViet['anh'] ?>" style="width: 100px"></td>
                       <td><?= $baiViet['ngay_dang'] ?></td>
                       <td>
 
@@ -75,7 +75,7 @@
                   <tr>
                     <th>STT</th>
                     <th>Tiêu đề</th>
-                    <th>Hình ảnh bài viết</th>
+                    <th>Hình ảnh</th>
                     <th>Ngày đăng</th>
                     <th>Thao tác</th>
                   </tr>
