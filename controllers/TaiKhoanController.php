@@ -76,90 +76,90 @@ class TaiKhoanController
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors = [];
 
-                var_dump($_POST);
-                die();
-ừ 
-                // if (isset($_POST['update_info'])) {
-                //     // Dữ liệu từ form sửa thông tin
-                //     $ho_ten = $_POST['ho_ten'] ?? '';
-                //     $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
-                //     $email = $_POST['email'] ?? '';
-                //     $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
-                //     $gioi_tinh = $_POST['gioi_tinh'] ?? '';
-                //     $dia_chi = $_POST['dia_chi'] ?? '';
-                //     $ngay_sinh = $_POST['ngay_sinh'] ?? '';
+                // var_dump($_POST);
+                // die();
 
-                //     // Kiểm tra và xử lý ảnh đại diện nếu có
-                //     $image_path = $thongTin['anh_dai_dien']; // Mặc định dùng ảnh cũ
-                //     if ($anh_dai_dien && $anh_dai_dien['error'] == 0) {
-                //         $image_path = 'uploads/' . basename($anh_dai_dien['name']);
-                //         if (!move_uploaded_file($anh_dai_dien['tmp_name'], $image_path)) {
-                //             $errors['anh_dai_dien'] = 'Không thể tải lên ảnh đại diện.';
-                //         }
-                //     }
+                if (isset($_POST['update_info'])) {
+                    // Dữ liệu từ form sửa thông tin
+                    $ho_ten = $_POST['ho_ten'] ?? '';
+                    $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
+                    $email = $_POST['email'] ?? '';
+                    $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
+                    $gioi_tinh = $_POST['gioi_tinh'] ?? '';
+                    $dia_chi = $_POST['dia_chi'] ?? '';
+                    $ngay_sinh = $_POST['ngay_sinh'] ?? '';
 
-                //     // Kiểm tra các giá trị khác
-                //     if (empty($ho_ten)) {
-                //         $errors['ho_ten'] = 'Họ tên không được để trống.';
-                //     }
-                //     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                //         $errors['email'] = 'Email không hợp lệ.';
-                //     }
-                //     if (!preg_match('/^0\d{9}$/', $so_dien_thoai)) {
-                //         $errors['so_dien_thoai'] = 'Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 chữ số.';
-                //     }
+                    // Kiểm tra và xử lý ảnh đại diện nếu có
+                    $image_path = $thongTin['anh_dai_dien']; // Mặc định dùng ảnh cũ
+                    if ($anh_dai_dien && $anh_dai_dien['error'] == 0) {
+                        $image_path = 'uploads/' . basename($anh_dai_dien['name']);
+                        if (!move_uploaded_file($anh_dai_dien['tmp_name'], $image_path)) {
+                            $errors['anh_dai_dien'] = 'Không thể tải lên ảnh đại diện.';
+                        }
+                    }
 
-                //     // Kiểm tra email đã tồn tại
-                //     if ($this->modelTaiKhoan->isEmailOrPhoneExists('email', $email, $id)) {
-                //         $errors['email'] = 'Email đã tồn tại.';
-                //     }
+                    // Kiểm tra các giá trị khác
+                    if (empty($ho_ten)) {
+                        $errors['ho_ten'] = 'Họ tên không được để trống.';
+                    }
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $errors['email'] = 'Email không hợp lệ.';
+                    }
+                    if (!preg_match('/^0\d{9}$/', $so_dien_thoai)) {
+                        $errors['so_dien_thoai'] = 'Số điện thoại phải bắt đầu bằng số 0 và có đúng 10 chữ số.';
+                    }
 
-                //     // Kiểm tra số điện thoại đã tồn tại
-                //     if ($this->modelTaiKhoan->isEmailOrPhoneExists('so_dien_thoai', $so_dien_thoai, $id)) {
-                //         $errors['so_dien_thoai'] = 'Số điện thoại đã tồn tại.';
-                //     }
+                    // Kiểm tra email đã tồn tại
+                    if ($this->modelTaiKhoan->isEmailOrPhoneExists('email', $email, $id)) {
+                        $errors['email'] = 'Email đã tồn tại.';
+                    }
 
-                //     // Nếu không có lỗi, tiến hành cập nhật
-                //     if (empty($errors)) {
-                //         $this->modelTaiKhoan->updateTaiKhoan($id, $ho_ten, $image_path, $email, $so_dien_thoai, $gioi_tinh, $dia_chi, $ngay_sinh);
-                //         $_SESSION['success'] = "Cập nhật thông tin cá nhân thành công!";
-                //     } else {
-                //         $_SESSION['error'] = $errors;
-                //     }
-                // }
+                    // Kiểm tra số điện thoại đã tồn tại
+                    if ($this->modelTaiKhoan->isEmailOrPhoneExists('so_dien_thoai', $so_dien_thoai, $id)) {
+                        $errors['so_dien_thoai'] = 'Số điện thoại đã tồn tại.';
+                    }
 
-                // if (isset($_POST['update_password'])) {
-                //     // Dữ liệu từ form đổi mật khẩu
-                //     $old_pass = $_POST['old_pass'] ?? '';
-                //     $new_pass = $_POST['new_pass'] ?? '';
-                //     $confirm_pass = $_POST['confirm_pass'] ?? '';
+                    // Nếu không có lỗi, tiến hành cập nhật
+                    if (empty($errors)) {
+                        $this->modelTaiKhoan->updateTaiKhoan($id, $ho_ten, $image_path, $email, $so_dien_thoai, $gioi_tinh, $dia_chi, $ngay_sinh);
+                        $_SESSION['success'] = "Cập nhật thông tin cá nhân thành công!";
+                    } else {
+                        $_SESSION['error'] = $errors;
+                    }
+                }
 
-                //     // Kiểm tra mật khẩu cũ
-                //     if (!password_verify($old_pass, $thongTin['mat_khau'])) {
-                //         $errors['old_pass'] = 'Mật khẩu cũ không chính xác.';
-                //     }
-                //     if ($new_pass !== $confirm_pass) {
-                //         $errors['confirm_pass'] = 'Mật khẩu xác nhận không khớp.';
-                //     }
-                //     if (strlen($new_pass) < 6) {
-                //         $errors['new_pass'] = 'Mật khẩu mới phải có ít nhất 6 ký tự.';
-                //     }
+                if (isset($_POST['update_password'])) {
+                    // Dữ liệu từ form đổi mật khẩu
+                    $old_pass = $_POST['old_pass'] ?? '';
+                    $new_pass = $_POST['new_pass'] ?? '';
+                    $confirm_pass = $_POST['confirm_pass'] ?? '';
 
-                //     // Nếu không có lỗi, cập nhật mật khẩu
-                //     if (empty($errors)) {
-                //         $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
-                //         $this->modelTaiKhoan->resetPassword($id, $hashPass);
-                //         $_SESSION['success'] = "Đổi mật khẩu thành công!";
-                //     } else {
-                //         $_SESSION['error'] = $errors;
-                //     }
-                // }
+                    // Kiểm tra mật khẩu cũ
+                    if (!password_verify($old_pass, $thongTin['mat_khau'])) {
+                        $errors['old_pass'] = 'Mật khẩu cũ không chính xác.';
+                    }
+                    if ($new_pass !== $confirm_pass) {
+                        $errors['confirm_pass'] = 'Mật khẩu xác nhận không khớp.';
+                    }
+                    if (strlen($new_pass) < 6) {
+                        $errors['new_pass'] = 'Mật khẩu mới phải có ít nhất 6 ký tự.';
+                    }
+
+                    // Nếu không có lỗi, cập nhật mật khẩu
+                    if (empty($errors)) {
+                        $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
+                        $this->modelTaiKhoan->resetPassword($id, $hashPass);
+                        $_SESSION['success'] = "Đổi mật khẩu thành công!";
+                    } else {
+                        $_SESSION['error'] = $errors;
+                    }
+                }
 
                 // Refresh trang sau khi xử lý
                 header('Location: ' . BASE_URL . '?act=detail-tai-khoan');
                 exit();
             }
-            // Hiển thị trang chi tiết tài khoản
+            //     // Hiển thị trang chi tiết tài khoản
             require_once './views/taikhoan/detail.php';
         } else {
             $_SESSION['error'] = "Không tìm thấy thông tin người dùng trong session.";
@@ -167,7 +167,6 @@ class TaiKhoanController
             exit();
         }
     }
-
 
     public function updateTaiKhoan()
     {
@@ -178,8 +177,8 @@ class TaiKhoanController
 
 
 
-            // var_dump($_POST);
-            // die();
+            var_dump($_POST);
+            die();
 
             if (isset($_POST['update_info'])) {
                 // Dữ liệu từ form sửa thông tin
@@ -194,7 +193,7 @@ class TaiKhoanController
                 // Kiểm tra và xử lý ảnh đại diện nếu có
                 $image_path = $thongTin['anh_dai_dien']; // Mặc định dùng ảnh cũ
                 if ($anh_dai_dien && $anh_dai_dien['error'] == 0) {
-                    $image_path = 'uploads/' . basename($anh_dai_dien['name']);
+                    $image_path = '.uploads/' . basename($anh_dai_dien['name']);
                     if (!move_uploaded_file($anh_dai_dien['tmp_name'], $image_path)) {
                         $errors['anh_dai_dien'] = 'Không thể tải lên ảnh đại diện.';
                     }

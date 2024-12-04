@@ -60,7 +60,7 @@
                                     <h3 class="product-name mb-3"><?= $thongTinSanPham['ten_san_pham']; ?></h3>
                                     <div class="ratings d-flex mb-3">
                                         <div class="pro-review">
-                                            <?php $countComment = count($listBinhLuan); ?>
+                                            <?php $countComment = count(value: $listBinhLuan); ?>
                                             <span><?= $countComment . ' bình luận' ?></span>
                                         </div>
                                     </div>
@@ -157,8 +157,40 @@
                                                 </div>
                                             </form>
 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Product Reviews End -->
 
-
+                    <!-- Product Reviews Start -->
+                    <div class="product-details-reviews section-padding pb-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="product-review-info">
+                                    <ul class="nav review-tab">
+                                        <li>
+                                            <?php $countDanhGia = count(value: $listDanhGia); ?>
+                                            <a class="active" data-bs-toggle="tab" href="#tab_three">Đánh giá (<?= $countDanhGia; ?>)</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content reviews-tab">
+                                        <div class="tab-pane fade show active" id="tab_three">
+                                            <?php foreach ($listDanhGia as $danhGia): ?>
+                                                <div class="total-reviews mb-3">
+                                                    <div class="rev-avatar">
+                                                        <img src="<?= BASE_URL . $danhGia['anh_dai_dien'] ?>" alt="">
+                                                    </div>
+                                                    <div class="review-box">
+                                                        <div class="post-author">
+                                                            <p><span><?= $danhGia['ho_ten'] ?> - </span><?= $danhGia['ngay_dang'] ?> </p>
+                                                        </div>
+                                                        <p><?= $danhGia['noi_dung'] ?></p>
+                                                    </div>
+                                                </div>
+                                            <?php endforeach ?>
                                         </div>
                                     </div>
                                 </div>

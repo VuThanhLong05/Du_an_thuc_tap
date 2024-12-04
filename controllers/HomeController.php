@@ -36,6 +36,7 @@ class HomeController
         $thongTinSanPham = $this->modelSanPham->getDetailSanPham($id);
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id);
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
+        $listDanhGia = $this->modelSanPham->getDanhGiaFromSanPham($id) ?? [];
         $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($thongTinSanPham['danh_muc_id']);
 
         if ($thongTinSanPham) {

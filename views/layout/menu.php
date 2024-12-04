@@ -94,7 +94,7 @@
 
                                                 <!-- <li><a href="login-register.html">Đăng kí</a></li> -->
                                                 <li><a href="<?= BASE_URL . '?act=detail-tai-khoan' ?>">Tài khoản</a></li>
-                                                <li><a href="<?= BASE_URL_ADMIN . '?' ?>">Quản lý admin</a></li>
+                                                <li><a href="<?= BASE_URL_ADMIN  ?>">Quản lý admin</a></li>
                                                 <li><a href="<?= BASE_URL . '?act=logout' ?>">Đăng xuất</a></li>
                                                 <li><a href="<?= BASE_URL . '?act=don-hang' ?>">Đơn hàng</a></li>
                                             <?php } ?>
