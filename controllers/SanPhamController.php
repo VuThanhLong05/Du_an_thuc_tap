@@ -34,6 +34,10 @@ class SanPhamController
 
         $listAnhSanPham = $this->modelSanPham->getListAnhSanPham($id) ?? [];
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id) ?? [];
+        // print_r($listBinhLuan);
+        // print_r($listDanhGia);
+        // var_dump($listDanhGia);
+        // die();
         $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']) ?? [];
 
         require_once './views/sanpham/detailSanPham.php';

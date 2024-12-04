@@ -107,6 +107,7 @@ class SanPham
         }
     }
 
+
     public function getBinhLuanFromSanPham($id)
     {
         try {
@@ -114,6 +115,22 @@ class SanPham
                     FROM binh_luans
                     INNER JOIN tai_khoans ON binh_luans.tai_khoan_id = tai_khoans.id
                     WHERE binh_luans.san_pham_id = :id';
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetchAll();
+        } catch (Exception $e) {
+            error_log('Lỗi: ' . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function getDanhGiaFromSanPham($id)
+    {
+        try {
+            $sql = 'SELECT danh_gias.*, tai_khoans.ho_ten, tai_khoans.anh_dai_dien
+                    FROM danh_gias
+                    INNER JOIN tai_khoans ON danh_gias.tai_khoan_id = tai_khoans.id
+                    WHERE danh_gias.san_pham_id = :id';
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $id]);
             return $stmt->fetchAll();
