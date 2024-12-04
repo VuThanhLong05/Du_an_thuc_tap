@@ -11,7 +11,7 @@
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="<?php BASE_URL ?>"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Tin Tức </li>
                             </ul>
                         </nav>
@@ -35,7 +35,9 @@
             <?php if (!empty($news)): ?>
                 <?php foreach ($news as $item): ?>
                     <div class="news-item">
-                        <h4><?= htmlspecialchars($item['tieu_de']) ?></h4>
+                        <h4><?= htmlspecialchars($item['tieu_de']) ?></h4> <br>
+                        <img style="width: 10%;" src="<?= htmlspecialchars($item['anh']) ?>" alt="<?= htmlspecialchars($post['tieu_de']) ?>"
+                            class="news-image"> <br> <br>
                         <p><?= nl2br(htmlspecialchars(substr($item['noi_dung'], 0, 200))) ?>...</p>
                         <p><small>Ngày đăng: <?= htmlspecialchars($item['ngay_dang']) ?></small></p>
                         <a href="index.php?act=chi-tiet-tin-tuc&id=<?= htmlspecialchars($item['id']) ?>" class="detail-btn">Xem
@@ -46,17 +48,12 @@
                 <p>Không có bài viết nào!</p>
             <?php endif; ?>
         </div>
-        <style>
-            .container {
-                max-width: 1400px;
-                margin: 20px auto;
-                padding: 20px;
-                background: #fff;
-                border-radius: 8px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                color: #333;
-            }
 
+
+
+        <?php require_once 'views/layout/footer.php'; ?>
+
+        <style>
             /* Tiêu đề bài viết */
             .container h1 {
                 font-size: 28px;
@@ -108,4 +105,3 @@
                 background-color: #f4f4f4;
             }
         </style>
-        <?php require_once 'views/layout/footer.php'; ?>

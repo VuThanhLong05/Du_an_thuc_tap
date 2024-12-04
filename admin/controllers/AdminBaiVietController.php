@@ -34,8 +34,6 @@ class AdminBaiVietController
     public function formAddBaiViet()
     {
         $listBaiViet = $this->modelBaiViet->getAllBaiViet();
-
-
         require_once './views/baiviet/addBaiViet.php';
 
         deleteSessionError();
@@ -43,8 +41,6 @@ class AdminBaiVietController
 
     public function postAddBaiViet()
     {
-        // var_dump($_POST);
-
         // Kiểm tra xem dữ liệu có submit lên không
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Lấy ra dữ liệu
@@ -52,6 +48,7 @@ class AdminBaiVietController
             $noi_dung = $_POST['noi_dung'] ?? '';
             $ngay_dang = $_POST['ngay_dang'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
+            $hinh_anh = $_FILES['hinh_anh'] ?? null;
 
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
@@ -70,22 +67,26 @@ class AdminBaiVietController
             if (empty($trang_thai)) {
                 $errors['trang_thai'] = 'Trạng thái không được để trống';
             }
+            // Kiểm tra file upload
+            if (!empty($hinh_anh['name'])) {
+                $file_thumb = uploadFile($hinh_anh, './uploads/');
+                if (!$file_thumb) {
+                    $errors['hinh_anh'] = 'Lỗi khi tải ảnh lên';
+                }
+            } else {
+                $file_thumb = null; // Cho phép không bắt buộc có ảnh
+            }
 
             $_SESSION['errors'] = $errors;
 
-            // var_dump($errors);die();
-
-           
             if (empty($errors)) {
-
                 $this->modelBaiViet->insertBaiViet(
                     $tieu_de,
                     $noi_dung,
                     $ngay_dang,
-                    $trang_thai
+                    $trang_thai,
+                    $file_thumb
                 );
-                // var_dump($this);
-                // die();
                 header('location: ' . BASE_URL_ADMIN . '?act=danh-sach-bai-viet');
                 exit();
             } else {
@@ -122,6 +123,10 @@ class AdminBaiVietController
             $noi_dung = $_POST['noi_dung'] ?? '';
             $ngay_dang = $_POST['ngay_dang'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
+            $hinh_anh = $_FILES['hinh_anh'] ?? null;
+
+            // Lấy thông tin bài viết cũ
+            $baiViet = $this->modelBaiViet->getDetailBaiViet($id);
 
             // Mảng lưu lỗi
             $errors = [];
@@ -140,6 +145,15 @@ class AdminBaiVietController
             if (empty($trang_thai)) {
                 $errors['trang_thai'] = 'Trạng thái không được để trống';
             }
+            // Kiểm tra file upload
+            if (!empty($hinh_anh['name'])) {
+                $file_thumb = uploadFile($hinh_anh, './uploads/');
+                if (!$file_thumb) {
+                    $errors['hinh_anh'] = 'Lỗi khi tải ảnh lên';
+                }
+            } else {
+                $file_thumb = $baiViet['hinh_anh']; // Giữ nguyên ảnh cũ nếu không upload mới
+            }
 
             $_SESSION['errors'] = $errors;
             // var_dump($errors); die();
@@ -153,7 +167,8 @@ class AdminBaiVietController
                     $tieu_de,
                     $noi_dung,
                     $ngay_dang,
-                    $trang_thai
+                    $trang_thai,
+                    $file_thumb
                 );
                 // var_dump($id);
                 // die();
@@ -162,7 +177,7 @@ class AdminBaiVietController
             } else {
                 $_SESSION['flash'] = true;
                 // require_once './views/baiviet/editBaiViet.php';
-                header('location: ' . BASE_URL_ADMIN . '?act=form-sua-bai-viet&id_bai_viet=' .$id);
+                header('location: ' . BASE_URL_ADMIN . '?act=form-sua-bai-viet&id_bai_viet=' . $id);
                 exit();
             }
         }

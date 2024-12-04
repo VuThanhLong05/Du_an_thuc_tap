@@ -6,11 +6,14 @@ class HomeController
     public $modelTaiKhoan;
     public $modelGioHang;
 
+    public $modelDonHang;
+
     public function __construct()
     {
         $this->modelSanPham = new SanPham();
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelGioHang = new GioHang();
+        $this->modelDonHang = new DonHang();
     }
 
     public function home()
@@ -27,7 +30,6 @@ class HomeController
         $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         require_once './views/sanpham/listSanPham.php';
     }
-
     public function chiTietSanPham()
     {
         $id = $_GET['id_san_pham'];
@@ -147,90 +149,6 @@ class HomeController
             exit();
         } else {
             header('Location: ' . BASE_URL . '?act=login');
-            exit();
-        }
-    }
-
-    // Thêm sản phẩm vào giỏ hàng
-    public function addGioHang()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_SESSION['user_client'])) {
-                $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
-                var_dump($mail);
-                die();
-                $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
-
-                if (!$gioHang) {
-                    $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
-                    $gioHang = ['id' => $gioHangId];
-                    $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-                } else {
-                    $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-                }
-
-                $san_pham_id = $_POST['san_pham_id'];
-                $so_luong = $_POST['so_luong'];
-
-                // Kiểm tra số lượng nhập vào có hợp lệ không
-                if (!is_numeric($so_luong) || $so_luong <= 0) {
-                    $_SESSION['error'] = 'Số lượng sản phẩm không hợp lệ';
-                    header('location:' . BASE_URL . '?act=gio-hang');
-                    exit();
-                }
-
-                // Kiểm tra số lượng còn lại trong kho
-                $sanPham = $this->modelSanPham->getDetailSanPham($san_pham_id);
-                if ($so_luong > $sanPham['so_luong_ton_kho']) {
-                    $_SESSION['error'] = 'Số lượng sản phẩm trong kho không đủ';
-                    header('location:' . BASE_URL . '?act=gio-hang');
-                    exit();
-                }
-
-                // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
-                $checkSanPham = false;
-                foreach ($chiTietGioHang as $detail) {
-                    if ($detail['san_pham_id'] == $san_pham_id) {
-                        $newSoLuong = $detail['so_luong'] + $so_luong;
-                        $this->modelGioHang->updateSoLuong($gioHang['id'], $san_pham_id, $newSoLuong);
-                        $checkSanPham = true;
-                    }
-                }
-
-                // Nếu sản phẩm chưa có trong giỏ hàng thì thêm vào
-                if (!$checkSanPham) {
-                    $this->modelGioHang->addDetailGioHang($gioHang['id'], $san_pham_id, $so_luong);
-                }
-
-                header('location:' . BASE_URL . '?act=gio-hang');
-                exit();
-            } else {
-                $_SESSION['error'] = 'Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng';
-                header('location:' . BASE_URL . '?act=login');
-                exit();
-            }
-        }
-    }
-
-    // Hiển thị giỏ hàng
-    public function gioHang()
-    {
-        if (isset($_SESSION['user_client'])) {
-            $mail = $this->modelTaiKhoan->getTaiKhoanFromEmail($_SESSION['user_client']);
-            $gioHang = $this->modelGioHang->getGioHangFromUser($mail['id']);
-
-            if (!$gioHang) {
-                $gioHangId = $this->modelGioHang->addGioHang($mail['id']);
-                $gioHang = ['id' => $gioHangId];
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-            } else {
-                $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-            }
-
-            require_once './views/gioHang.php';
-        } else {
-            $_SESSION['error'] = 'Bạn cần đăng nhập để xem giỏ hàng';
-            header('location:' . BASE_URL . '?act=login');
             exit();
         }
     }

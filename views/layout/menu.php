@@ -48,12 +48,9 @@
                                                 <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>">Tất cả sản phẩm</a></li>
                                             </ul>
                                         </li>
-
-                                        <li><a href="<?= BASE_URL . '?act=gioi-thieu' ?>">Giới thiệu</a></li>
                                         <li><a href="<?= BASE_URL . '?act=danh-sach-tin-tuc' ?>">Tin Tức</a></li>
                                         <li><a href="<?= BASE_URL . '?act=form-them-lien-he' ?>">Liên hệ</a></li>
                                         <li><a href="<?= BASE_URL . '?act=danh-sach-khuyen-mai' ?>">Khuyến mãi</a></li>
-
                                     </ul>
                                 </nav>
                                 <!-- main menu navbar end -->
@@ -96,9 +93,10 @@
                                             <?php } else { ?>
 
                                                 <!-- <li><a href="login-register.html">Đăng kí</a></li> -->
-                                                <li><a href="my-account.html">Tài khoản</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=detail-tai-khoan' ?>">Tài khoản</a></li>
                                                 <li><a href="<?= BASE_URL_ADMIN . '?' ?>">Quản lý admin</a></li>
                                                 <li><a href="<?= BASE_URL . '?act=logout' ?>">Đăng xuất</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=don-hang' ?>">Đơn hàng</a></li>
                                             <?php } ?>
                                         </ul>
                                     </li>
@@ -106,7 +104,7 @@
                                     <li>
                                         <a href="#" class="minicart-btn">
                                             <i class="pe-7s-shopbag"></i>
-                                            <div class="notification">2</div>
+                                            <div class="notification"></div>
                                         </a>
                                     </li>
                                 </ul>

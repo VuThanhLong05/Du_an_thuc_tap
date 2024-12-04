@@ -1,7 +1,5 @@
 <?php require_once 'layout/header.php'; ?>
-
 <?php require_once 'layout/menu.php'; ?>
-
 
 <main>
     <!-- breadcrumb area start -->
@@ -64,7 +62,12 @@
                                                 </td>
                                                 <td class="pro-quantity">
                                                     <div class="pro-qty d-flex">
-                                                        <input type="text" value="<?= $sanPham['so_luong'] ?>" name="so_luong">
+                                                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="post">
+                                                            <div class="quantity-cart-box d-flex align-items-center mb-4">
+                                                                <input type="hidden" name="san_pham_id" value="<?= $thongTinSanPham['id'] ?>">
+                                                                <input type="text" value="<?= $sanPham['so_luong'] ?>" name="so_luong" class="form-control">
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </td>
                                                 <td class="pro-subtotal">
@@ -80,7 +83,11 @@
                                                         echo formatprice($tong_tien);  ?>
                                                     </span>
                                                 </td>
-                                                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                                                <td class="pro-remove">
+                                                    <a href="<?= BASE_URL . '?act=xoa-san-pham&id=' . $sanPham['san_pham_id'] ?>" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?');">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         <?php endforeach; ?>
                                     <?php else: ?>
@@ -94,14 +101,17 @@
 
                         <!-- Cart Update Option -->
                         <div class="cart-update-option d-block d-md-flex justify-content-between">
-                            <div class="apply-coupon-wrapper">
-                                <form action="#" method="post" class=" d-block d-md-flex">
-                                    <input type="text" placeholder="Enter Your Coupon Code" required />
-                                    <button class="btn btn-sqr">Apply Coupon</button>
+                            <div class="d-flex">
+                                <form action="<?= BASE_URL . '?act=cap-nhat-gio-hang' ?>" method="post">
+                                    <div class="cart-update" style="margin-left: 130px;">
+                                        <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
+                                        <button type="submit" class="btn btn-sqr">Cập nhật giỏ hàng</button>
+                                    </div>
                                 </form>
                             </div>
-                            <div class="cart-update">
-                                <a href="#" class="btn btn-sqr">Update Cart</a>
+
+                            <div class="cart">
+                                <a href="<?= BASE_URL . '?act=lam-moi-gio-hang' ?>" class="btn btn-sqr" onclick="return confirm('Bạn có chắc muốn làm mới giỏ hàng?');">Làm mới giỏ hàng</a>
                             </div>
                         </div>
                     </div>
@@ -114,32 +124,59 @@
                                 <h6>Tổng đơn hàng</h6>
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <tr>
-                                            <td>Tổng tiền sản phẩm</td>
-                                            <td><?= formatprice($tong_tien_gio_hang) . ' VNĐ'?></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Vận chuyển</td>
-                                            <td>50.000 VNĐ</td>
-                                        </tr>
-                                        <tr class="total">
-                                            <td>Tổng thanh toán</td>
-                                            <td class="total-amount"><?= formatprice($tong_tien_gio_hang + 50.000) . ' VNĐ'?></td>
-                                        </tr>
+                                        <tbody>
+                                            <?php if (!empty($chiTietGioHang)): ?>
+                                                <!-- Hiển thị tổng tiền sản phẩm -->
+                                                <tr>
+                                                    <td>Tổng tiền sản phẩm</td>
+                                                    <td><?= formatprice($tong_tien_gio_hang) . ' VNĐ' ?></td>
+                                                </tr>
+
+                                                <!-- Hiển thị phí vận chuyển -->
+                                                <tr>
+                                                    <td>Vận chuyển</td>
+                                                    <td>50.000 VNĐ</td>
+                                                </tr>
+
+                                                <!-- Hiển thị tổng thanh toán -->
+                                                <tr class="total">
+                                                    <td>Tổng thanh toán</td>
+                                                    <td class="total-amount">
+                                                        <?php
+                                                        $total = $tong_tien_gio_hang + 50000; // Thêm phí vận chuyển
+                                                        echo formatprice($total) . ' VNĐ';
+                                                        ?>
+                                                    </td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td>Tổng tiền sản phẩm</td>
+                                                    <td>0 VNĐ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Vận chuyển</td>
+                                                    <td>50.000 VNĐ</td>
+                                                </tr>
+                                                <tr class="total">
+                                                    <td>Tổng thanh toán</td>
+                                                    <td class="total-amount">50.000 VNĐ</td>
+                                                </tr>
+                                            <?php endif; ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <a href="checkout.html" class="btn btn-sqr d-block">Tiến hành đặt hàng </a>
+                            <a href="<?= BASE_URL . '?act=thanh-toan' ?>" class="btn btn-sqr d-block">Tiến hành đặt hàng</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+    </div>
     <!-- cart main wrapper end -->
 </main>
 
 <?php require_once 'layout/miniCart.php'; ?>
-
-
 <?php require_once 'layout/footer.php'; ?>
