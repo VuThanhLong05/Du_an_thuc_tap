@@ -36,6 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     <?php foreach ($donhang as $item): ?>
                         <tr>
                             <td><?= htmlspecialchars($item['ho_ten']) ?></td>

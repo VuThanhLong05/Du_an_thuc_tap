@@ -5,8 +5,8 @@ class HomeController
     public $modelSanPham;
     public $modelTaiKhoan;
     public $modelGioHang;
-
     public $modelDonHang;
+    // public $modelTinTuc;
 
     public function __construct()
     {
@@ -14,12 +14,23 @@ class HomeController
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelGioHang = new GioHang();
         $this->modelDonHang = new DonHang();
+        // $this->modelTinTuc = new TinTuc();
     }
 
     public function home()
     {
         // Lấy danh sách sản phẩm từ cơ sở dữ liệu
         $listSanPham = $this->modelSanPham->getAllSanPham();
+        // $news = $this->modelTinTuc->getAllTinTuc();
+
+        // $userId = $_SESSION['user_client']['id'];
+        // $gioHang = $this->modelGioHang->getGioHangFromUser($userId);
+        // // Nếu giỏ hàng chưa tồn tại, tạo mới
+        // if (!$gioHang) {
+        //     $gioHangId = $this->modelGioHang->addGioHang($userId);
+        //     $gioHang = ['id' => $gioHangId];
+        // }
+        // $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
         require_once './views/home.php';
     }
 

@@ -102,11 +102,37 @@
                                     </li>
 
                                     <li>
-                                        <a href="#" class="minicart-btn">
+                                        <a href="<?= BASE_URL . '?act=gio-hang' ?>">
                                             <i class="pe-7s-shopbag"></i>
-                                            <div class="notification"></div>
+                                            <div class="notification">
+                                                <?php
+                                                // Kiểm tra nếu giỏ hàng rỗng
+                                                if (empty($chiTietGioHang)) {
+                                                    echo '0';  // Nếu giỏ hàng trống thì hiển thị 0
+                                                } else {
+                                                    $uniqueProducts = [];  // Mảng lưu trữ các ID sản phẩm đã gặp
+                                                    $totalQuantity = 0;  // Biến tính tổng số lượng sản phẩm
+
+                                                    foreach ($chiTietGioHang as $gioHang) {
+                                                        // Nếu sản phẩm chưa xuất hiện trong mảng uniqueProducts thì tính
+                                                        if (!in_array($gioHang['san_pham_id'], $uniqueProducts)) {
+                                                            $uniqueProducts[] = $gioHang['san_pham_id'];  // Thêm ID sản phẩm vào mảng
+                                                            $totalQuantity += $gioHang['so_luong'];  // Cộng dồn số lượng sản phẩm
+                                                        }
+                                                    } ?>
+
+                                                    <strong><?= $totalQuantity;  ?></strong>
+
+                                                <?php
+                                                    // In ra tổng số lượng sản phẩm duy nhất trong giỏ hàng
+                                                }
+                                                ?>
+                                            </div>
                                         </a>
                                     </li>
+
+
+
                                 </ul>
                             </div>
                         </div>

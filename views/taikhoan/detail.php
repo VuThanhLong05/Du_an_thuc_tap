@@ -64,7 +64,7 @@
 
                 <div class="form-group">
                     <label>Địa chỉ:</label>
-                    <input class="form-control" type="text" value="<?= htmlspecialchars($thongTin['dia_chi']); ?>"
+                    <input class="form-control" type="text" value="<?= $thongTin['dia_chi']; ?>"
                         name="dia_chi">
                 </div>
 
