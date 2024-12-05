@@ -24,10 +24,14 @@ class ThanhToanController
         if (isset($_SESSION['user_client'])) {
             $userId = $_SESSION['user_client'];
             $gioHang = $this->modelGioHang->getGioHangFromUser($userId['id']);
-            if (!$gioHang) {
-                $gioHangId = $this->modelGioHang->addGioHang($userId);
-                $gioHang = ['id' => $gioHangId];
+
+            // Kiểm tra nếu chưa có giỏ hàng hoặc giỏ hàng trống
+            if (!$gioHang || empty($this->modelGioHang->getDetailGioHang($gioHang['id']))) {
+                echo "<script>alert('Chưa có giỏ hàng để thanh toán!');</script>";
+                echo "<script>window.location.href = '" . BASE_URL . "?act=gio-hang';</script>";
+                die;
             }
+
             $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
             require_once './views/thanhtoan/thanhToan.php';
         } else {
@@ -243,6 +247,7 @@ class ThanhToanController
 
                 echo "<script>alert('Thanh toán thành công! Đơn hàng của bạn sẽ được xử lý.');</script>";
                 echo "<script>window.location.href = '" . BASE_URL . "?act=don-hang';</script>";
+                die();
             }
         }
     }

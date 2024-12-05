@@ -177,13 +177,13 @@ class TaiKhoanController
 
 
 
-            var_dump($_POST);
-            die();
+            // var_dump($_POST);
+            // die();
 
             if (isset($_POST['update_info'])) {
                 // Dữ liệu từ form sửa thông tin
                 $ho_ten = $_POST['ho_ten'] ?? '';
-                $anh_dai_dien = $_FILES['anh_dai_dien'] ?? null;
+                $anh_dai_dien = $_FILES['anh_dai_dien                                                                  '] ?? null;
                 $email = $_POST['email'] ?? '';
                 $so_dien_thoai = $_POST['so_dien_thoai'] ?? '';
                 $gioi_tinh = $_POST['gioi_tinh'] ?? '';
@@ -229,32 +229,32 @@ class TaiKhoanController
                 }
             }
 
-            // if (isset($_POST['update_password'])) {
-            //     // Dữ liệu từ form đổi mật khẩu
-            //     $old_pass = $_POST['old_pass'] ?? '';
-            //     $new_pass = $_POST['new_pass'] ?? '';
-            //     $confirm_pass = $_POST['confirm_pass'] ?? '';
+            if (isset($_POST['update_password'])) {
+                // Dữ liệu từ form đổi mật khẩu
+                $old_pass = $_POST['old_pass'] ?? '';
+                $new_pass = $_POST['new_pass'] ?? '';
+                $confirm_pass = $_POST['confirm_pass'] ?? '';
 
-            //     // Kiểm tra mật khẩu cũ
-            //     if (!password_verify($old_pass, $thongTin['mat_khau'])) {
-            //         $errors['old_pass'] = 'Mật khẩu cũ không chính xác.';
-            //     }
-            //     if ($new_pass !== $confirm_pass) {
-            //         $errors['confirm_pass'] = 'Mật khẩu xác nhận không khớp.';
-            //     }
-            //     if (strlen($new_pass) < 6) {
-            //         $errors['new_pass'] = 'Mật khẩu mới phải có ít nhất 6 ký tự.';
-            //     }
+                // Kiểm tra mật khẩu cũ
+                if (!password_verify($old_pass, $thongTin['mat_khau'])) {
+                    $errors['old_pass'] = 'Mật khẩu cũ không chính xác.';
+                }
+                if ($new_pass !== $confirm_pass) {
+                    $errors['confirm_pass'] = 'Mật khẩu xác nhận không khớp.';
+                }
+                if (strlen($new_pass) < 6) {
+                    $errors['new_pass'] = 'Mật khẩu mới phải có ít nhất 6 ký tự.';
+                }
 
-            //     // Nếu không có lỗi, cập nhật mật khẩu
-            //     if (empty($errors)) {
-            //         $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
-            //         $this->modelTaiKhoan->resetPassword($id, $hashPass);
-            //         $_SESSION['success'] = "Đổi mật khẩu thành công!";
-            //     } else {
-            //         $_SESSION['error'] = $errors;
-            //     }
-            // }
+                // Nếu không có lỗi, cập nhật mật khẩu
+                if (empty($errors)) {
+                    $hashPass = password_hash($new_pass, PASSWORD_BCRYPT);
+                    $this->modelTaiKhoan->resetPassword($id, $hashPass);
+                    $_SESSION['success'] = "Đổi mật khẩu thành công!";
+                } else {
+                    $_SESSION['error'] = $errors;
+                }
+            }
 
             // Refresh trang sau khi xử lý
             header('Location: ' . BASE_URL . '?act=detail-tai-khoan');

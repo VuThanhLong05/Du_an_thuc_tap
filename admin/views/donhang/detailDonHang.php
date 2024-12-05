@@ -56,10 +56,10 @@
                         Đơn hàng: <?= $donHang['ten_trang_thai']; ?>
                     </div>
 
-                    <div class="alert alert-<?= $colorAlerts; ?>" role="alert">
+                    <!-- <div class="alert alert-<?= $colorAlerts; ?>" role="alert">
 
                         Trạng thái thanh toán: <?= $donHang['trang_thai_thanh_toan'] ?>
-                    </div>
+                    </div> -->
 
 
 
@@ -160,11 +160,11 @@
 
                                         <tr>
                                             <th>Tiền vận chuyển:</th>
-                                            <td>50.000</td>
+                                            <td>50.000 VNĐ</td>
                                         </tr>
                                         <tr>
                                             <th>Tông tiền:</th>
-                                            <td><?= formatprice($tong_tien) + 50.000 ?></td>
+                                            <td><?= formatprice($tong_tien) + 50000 ?>VNĐ</td>
                                         </tr>
                                     </table>
                                 </div>
