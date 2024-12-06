@@ -48,20 +48,23 @@
                                         height="50">
                                     <?= htmlspecialchars($item['san_pham'][0]['ten_san_pham']) ?>
                                     (<?= htmlspecialchars($item['san_pham'][0]['so_luong']) ?> x
-                                    <?= htmlspecialchars(number_format($item['san_pham'][0]['gia_san_pham'], 0, ',', '.')) ?>đ)
+                                    <?= htmlspecialchars(number_format($item['san_pham'][0]['gia_san_pham'], 0, ',', '.')) ?>VNĐ)
                                     <?php if (count($item['san_pham']) > 1): ?>
                                         <span class="badge badge-info">+<?= count($item['san_pham']) - 1 ?> sản phẩm khác</span>
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </td>
                             <td>
+
                                 <?php
                                 $tong_tien = 0;
                                 foreach ($item['san_pham'] as $san_pham) {
                                     $tong_tien += $san_pham['gia_san_pham'] * $san_pham['so_luong'];
                                 }
-                                echo htmlspecialchars(number_format($tong_tien, 0, ',', '.')) . ' đ';
+                                echo htmlspecialchars(number_format($tong_tien, 0, ',', '.')) . ' VNĐ';
                                 ?>
+
+                                <!-- <?= htmlspecialchars(number_format($item['tong_tien'])) ?> -->
                             </td>
                             <td><?= htmlspecialchars($item['trang_thai']) ?></td>
                             <td>

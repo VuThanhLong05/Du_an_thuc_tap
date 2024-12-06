@@ -2,16 +2,20 @@
 class TinTucController
 {
     private $model;
+    public $modelSanPham;
+
 
     public function __construct()
     {
         $this->model = new TinTuc(); // Khởi tạo model TinTuc
+        $this->modelSanPham = new SanPham();
     }
 
     // Hiển thị danh sách tin tức
     public function danhSachTinTuc()
     {
         $news = $this->model->getAllTinTuc(); // Lấy danh sách tin tức từ model
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         require_once './views/tintuc/TinTuc.php'; // Gửi dữ liệu đến view
     }
 

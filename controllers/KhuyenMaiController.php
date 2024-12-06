@@ -2,16 +2,19 @@
 class KhuyenMaiController
 {
     private $modelKhuyenMai;
+    public $modelSanPham;
 
     public function __construct()
     {
         $this->modelKhuyenMai = new KhuyenMai();
+        $this->modelSanPham = new SanPham();
     }
 
     public function danhSachKhuyenMai()
     {
 
         $listKhuyenMai = $this->modelKhuyenMai->getAllKhuyenMai();
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
         require_once './views/khuyenmai/listKhuyenMai.php';
     }
