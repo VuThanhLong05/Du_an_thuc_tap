@@ -104,7 +104,9 @@ class DonHang
             ct.so_luong, 
             sp.gia_san_pham,  
             (ct.so_luong * sp.gia_san_pham) AS thanh_tien,  
-            sp.hinh_anh
+            sp.hinh_anh,
+            dh.tong_tien,  -- Lấy trường tổng tiền từ bảng don_hangs
+            dh.trang_thai_thanh_toan_id  -- Lấy trực tiếp trường trạng thái thanh toán ID
         FROM 
             don_hangs AS dh
         INNER JOIN 
@@ -116,7 +118,7 @@ class DonHang
         INNER JOIN 
             trang_thai_don_hangs AS ttt ON dh.trang_thai_id = ttt.id
         INNER JOIN 
-            phuong_thuc_thanh_toans AS ptth ON dh.phuong_thuc_thanh_toan_id = ptth.id  -- JOIN với bảng phương thức thanh toán
+            phuong_thuc_thanh_toans AS ptth ON dh.phuong_thuc_thanh_toan_id = ptth.id
         WHERE 
             dh.id = :don_hang_id";
 
@@ -127,6 +129,8 @@ class DonHang
 
         return $result;
     }
+
+
     public function huyDonHang($don_hang_id, $tai_khoan_id)
     {
         $sql = "UPDATE don_hangs 

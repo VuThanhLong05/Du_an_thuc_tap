@@ -24,6 +24,7 @@ class ThanhToanController
         if (isset($_SESSION['user_client'])) {
             $userId = $_SESSION['user_client'];
             $gioHang = $this->modelGioHang->getGioHangFromUser($userId['id']);
+            $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
             // Kiểm tra nếu chưa có giỏ hàng hoặc giỏ hàng trống
             if (!$gioHang || empty($this->modelGioHang->getDetailGioHang($gioHang['id']))) {

@@ -68,6 +68,19 @@
             <td><?php echo $chitietdonhang[0]['phuong_thuc_thanh_toan']; ?></td>
         </tr>
         <tr>
+            <th>Trạng thái thanh toán:</th>
+            <td><?php
+
+                if ($chitietdonhang[0]['trang_thai_thanh_toan_id'] == 1) {
+                    echo "Chưa thanh toán";
+                } elseif ($chitietdonhang[0]['trang_thai_thanh_toan_id'] == 2) {
+                    echo "Đã thanh toán";
+                }
+
+
+                ?></td>
+        </tr>
+        <tr>
             <th>Trạng thái:</th>
             <td><?php echo $chitietdonhang[0]['trang_thai']; ?></td>
         </tr>
@@ -77,12 +90,12 @@
     $totalAmount = 0; // Khởi tạo biến tổng tiền
 
     foreach ($chitietdonhang as $item) {
-        $totalAmount += $item['thanh_tien']; // Cộng dồn thành tiền cho từng sản phẩm
+        // $totalAmount += $item['thanh_tien']; // Cộng dồn thành tiền cho từng sản phẩm
     }
     ?>
 
     <div class="total-amount">
-        <strong>Tổng thanh toán:</strong> <?php echo number_format($totalAmount, 0, ',', '.'); ?> VNĐ
+        <strong>Tổng thanh toán:</strong> <?php echo formatprice($item['tong_tien']); ?> VNĐ
     </div>
     <br>
     <div class="back-button">

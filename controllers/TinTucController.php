@@ -26,6 +26,7 @@ class TinTucController
         $id = intval($id);      // Đảm bảo ID là số nguyên
 
         $post = $this->model->getTinTucById($id); // Lấy tin tức từ model
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
         // Kiểm tra nếu bài viết không tồn tại
         if (!$post) {
