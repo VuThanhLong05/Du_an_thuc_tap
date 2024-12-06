@@ -84,39 +84,18 @@
     <div class="total-amount">
         <strong>Tổng thanh toán:</strong> <?php echo number_format($totalAmount, 0, ',', '.'); ?> VNĐ
     </div>
+    <br>
     <div class="back-button">
-        <a href="javascript:history.back()" class="btn btn-back">Quay lại</a>
+        <a href="javascript:history.back()" class="btn btn-back">
+            <i class="bi bi-arrow-left"></i> Quay lại
+        </a>
     </div>
 </div>
-
+<br>
 <?php require_once 'views/layout/footer.php'; ?>
 
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #f7f7f7;
-        color: #343a40;
-        line-height: 1.6;
-        padding: 40px;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        background-color: #fff;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        padding: 40px;
-    }
-
     .page-title {
         text-align: center;
         font-size: 36px;
@@ -144,6 +123,30 @@
         border-radius: 10px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
+
+    .back-button {
+        text-align: right;
+        /* Căn phải toàn bộ nội dung */
+        margin-right: 20px;
+    }
+
+    .back-button .btn-back {
+        background-color: #007bff;
+        color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        font-size: 14px;
+        text-decoration: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .back-button .btn-back:hover {
+        background-color: #0056b3;
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        text-decoration: none;
+    }
+
 
     th,
     td {
