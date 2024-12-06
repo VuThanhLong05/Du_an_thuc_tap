@@ -6,7 +6,7 @@ class HomeController
     public $modelTaiKhoan;
     public $modelGioHang;
     public $modelDonHang;
-    // public $modelTinTuc;
+    public $modelTinTuc;
 
     public function __construct()
     {
@@ -14,14 +14,15 @@ class HomeController
         $this->modelTaiKhoan = new TaiKhoan();
         $this->modelGioHang = new GioHang();
         $this->modelDonHang = new DonHang();
-        // $this->modelTinTuc = new TinTuc();
+        $this->modelTinTuc = new TinTuc();
     }
 
     public function home()
     {
         // Lấy danh sách sản phẩm từ cơ sở dữ liệu
         $listSanPham = $this->modelSanPham->getAllSanPham();
-        // $news = $this->modelTinTuc->getAllTinTuc();
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+        $news = $this->modelTinTuc->getAllTinTuc();
 
         // $userId = $_SESSION['user_client']['id'];
         // $gioHang = $this->modelGioHang->getGioHangFromUser($userId);
@@ -130,24 +131,24 @@ class HomeController
     }
 
     // Xử lý đăng ký tài khoản
-    public function postThemTaiKhoan()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $email = $_POST['email'];
-            $mat_khau = $_POST['mat_khau'];
-            $trang_thai = $_POST['trang_thai'];
+    // public function postThemTaiKhoan()
+    // {
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         $email = $_POST['email'];
+    //         $mat_khau = $_POST['mat_khau'];
+    //         $trang_thai = $_POST['trang_thai'];
 
-            // Mã hóa mật khẩu
-            $hashedPassword = password_hash($mat_khau, PASSWORD_BCRYPT);
+    //         // Mã hóa mật khẩu
+    //         $hashedPassword = password_hash($mat_khau, PASSWORD_BCRYPT);
 
-            // Thêm tài khoản vào cơ sở dữ liệu
-            $this->modelTaiKhoan->insertTaiKhoan($email, $hashedPassword, $trang_thai);
+    //         // Thêm tài khoản vào cơ sở dữ liệu
+    //         $this->modelTaiKhoan->insertTaiKhoan($email, $hashedPassword, $trang_thai);
 
-            // Chuyển hướng về danh sách tài khoản
-            header('Location: ' . BASE_URL . '?act=danh-sach-tai-khoan');
-            exit();
-        }
-    }
+    //         // Chuyển hướng về danh sách tài khoản
+    //         header('Location: ' . BASE_URL . '?act=danh-sach-tai-khoan');
+    //         exit();
+    //     }
+    // }
 
     // Đăng xuất
     public function Logout()

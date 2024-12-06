@@ -30,22 +30,25 @@
                                         </li>
                                         <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>">Sản phẩm <i class="fa fa-angle-down"></i></a>
                                             <ul class="dropdown">
-                                                <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham&id_danh_muc=1' ?>">Danh mục 1 <i class="fa fa-angle-right"></i></a>
-                                                    <!-- Dropdown con -->
-                                                    <ul class="dropdown sub-menu">
-                                                        <li><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=1' ?>">Sản phẩm 1.1</a></li>
+                                                <?php foreach ($listDanhMuc as $danhMuc): ?>
+                                                    <li><a href="<?= BASE_URL . '?act=tim-kiem&danh_muc=' . $danhMuc['id']; ?>"><?= $danhMuc['ten_danh_muc'] ?></a></li>
+                                                <?php endforeach ?>
+                                                <!-- <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham&id_danh_muc=1' ?>">Danh mục 1 <i class="fa fa-angle-right"></i></a> -->
+                                                <!-- Dropdown con -->
+                                                <!-- <ul class="dropdown sub-menu"> -->
+                                                <!-- <li><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=1' ?>">Sản phẩm 1.1</a></li>
                                                         <li><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=2' ?>">Sản phẩm 1.2</a></li>
-                                                        <li><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=3' ?>">Sản phẩm 1.3</a></li>
-                                                    </ul>
-                                                </li>
+                                                        <li><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=3' ?>">Sản phẩm 1.3</a></li> -->
+                                                <!-- </ul>
+                                                </li>a
                                                 <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham&id_danh_muc=2' ?>">Danh mục 2 <i class="fa fa-angle-right"></i></a>
                                                     <ul class="dropdown sub-menu">
                                                         <li><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=4' ?>">Sản phẩm 2.1</a></li>
                                                         <li><a href="<?= BASE_URL . '?act=chi-tiet-san-pham&id_san_pham=5' ?>">Sản phẩm 2.2</a></li>
-                                                    </ul>
-                                                </li>
+                                                    </ul> -->
+                                                <!-- </li>
                                                 <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham&id_danh_muc=3' ?>">Danh mục 3</a></li>
-                                                <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>">Tất cả sản phẩm</a></li>
+                                                <li><a href="<?= BASE_URL . '?act=danh-sach-san-pham' ?>">Tất cả sản phẩm</a></li>  -->
                                             </ul>
                                         </li>
                                         <li><a href="<?= BASE_URL . '?act=danh-sach-tin-tuc' ?>">Tin Tức</a></li>
