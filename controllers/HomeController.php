@@ -50,7 +50,7 @@ class HomeController
         $listBinhLuan = $this->modelSanPham->getBinhLuanFromSanPham($id);
         $listDanhGia = $this->modelSanPham->getDanhGiaFromSanPham($id) ?? [];
         $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($thongTinSanPham['danh_muc_id']);
-
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         if ($thongTinSanPham) {
             require_once './views/sanpham/detailSanPham.php';
         } else {
@@ -81,6 +81,7 @@ class HomeController
     // Form đăng nhập
     public function formLogin()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         require_once './views/auth/formLogin.php';
         deleteSessionError();
         exit();

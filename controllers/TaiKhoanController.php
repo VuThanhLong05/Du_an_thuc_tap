@@ -3,19 +3,23 @@
 class TaiKhoanController
 {
     public $modelTaiKhoan;
+    public $modelSanPham;
 
     public function __construct()
     {
         $this->modelTaiKhoan = new TaiKhoan();
+        $this->modelSanPham = new SanPham();
     }
 
     public function danhSach()
     {
         $listQuanTri = $this->modelTaiKhoan->getAllTaiKhoan(1);
+        // $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
     }
 
     public function formAdd()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         require_once './views/auth/formDangKy.php';
         deleteSessionError();
     }
@@ -72,6 +76,7 @@ class TaiKhoanController
         if ($id) {
             // Lấy thông tin tài khoản từ model
             $thongTin = $this->modelTaiKhoan->getDetailTaiKhoan($id);
+            $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors = [];
@@ -174,6 +179,7 @@ class TaiKhoanController
             $errors = [];
             $id = $_SESSION['user']['id'] ?? null;
             $thongTin = $this->modelTaiKhoan->getDetailTaiKhoan($id);
+            $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
 
 

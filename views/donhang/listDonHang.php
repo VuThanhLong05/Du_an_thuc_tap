@@ -57,14 +57,14 @@
                             <td>
 
                                 <?php
-                                $tong_tien = 0;
-                                foreach ($item['san_pham'] as $san_pham) {
-                                    $tong_tien += $san_pham['gia_san_pham'] * $san_pham['so_luong'];
-                                }
-                                echo htmlspecialchars(number_format($tong_tien, 0, ',', '.')) . ' VNĐ';
+                                // $tong_tien = 0;
+                                // foreach ($item['san_pham'] as $san_pham) {
+                                //     $tong_tien += $san_pham['gia_san_pham'] * $san_pham['so_luong'];
+                                // }
+                                // echo htmlspecialchars(number_format($tong_tien, 0, ',', '.')) . ' VNĐ';
                                 ?>
 
-                                <!-- <?= htmlspecialchars(number_format($item['tong_tien'])) ?> -->
+                                <?= htmlspecialchars(number_format($item['tong_tien'])) ?>
                             </td>
                             <td><?= htmlspecialchars($item['trang_thai']) ?></td>
                             <td>

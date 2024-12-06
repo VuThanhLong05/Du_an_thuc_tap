@@ -81,7 +81,7 @@ class GioHangController
             $userId = $_SESSION['user_client']['id'];
 
 
-
+            $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
             // Lấy thông tin giỏ hàng của người dùng
             $gioHang = $this->modelGioHang->getGioHangFromUser($userId);
 

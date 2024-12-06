@@ -12,13 +12,13 @@ class SanPhamController
     {
         $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         $listSanPham = $this->modelSanPham->getAllSanPham();
-
         require_once './views/sanpham/listSanPham.php';
     }
 
 
     public function chiTietSanPham()
     {
+
         $id = isset($_GET['id_san_pham']) && !empty(trim($_GET['id_san_pham'])) ? htmlspecialchars(trim($_GET['id_san_pham'])) : 0;
 
         if (!$id) {
@@ -39,6 +39,7 @@ class SanPhamController
         // var_dump($listDanhGia);
         // die();
         $listSanPhamCungDanhMuc = $this->modelSanPham->getListSanPhamDanhMuc($sanPham['danh_muc_id']) ?? [];
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
         require_once './views/sanpham/detailSanPham.php';
     }

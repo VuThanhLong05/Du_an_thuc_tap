@@ -2,10 +2,12 @@
 class DonHangController
 {
     private $model;
+    public $modelSanPham;
 
     public function __construct()
     {
         $this->model = new DonHang(); // Khởi tạo model DonHang
+        $this->modelSanPham = new SanPham();
     }
 
     public function donHang()
@@ -30,6 +32,10 @@ class DonHangController
             exit();
         }
 
+
+        $tai_khoan_id = $_SESSION['user']['id'];
+        $donhang = $this->model->getDonHangByUserId($tai_khoan_id); // Lấy danh sách đơn hàng
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         // Lấy ID đơn hàng từ URL
         $don_hang_id = $_GET['id'];
 
