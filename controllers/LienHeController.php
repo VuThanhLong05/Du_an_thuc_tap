@@ -2,11 +2,13 @@
 class LienHeController
 {
     private $model;
+    public $modelSanPham;
 
     public function __construct()
     {
         // Kết nối database và khởi tạo model
         $this->model = new LienHeModel();
+        $this->modelSanPham = new SanPham();
     }
 
     /**
@@ -15,6 +17,7 @@ class LienHeController
 
     public function formAdd()
     {
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
         require_once './views/lienhe/formThemLienHe.php';
         deleteSessionError();
     }
