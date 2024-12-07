@@ -48,10 +48,10 @@
 
                                 <div class="form-group col-12">
                                     <label>Hình ảnh bài viết</label> <br>
-                                    <img style="width: 30%;" src="<?= BASE_URL . $baiViet['hinh_anh'] ?>" alt=""> <br> <br>
-                                    <input type="file" class="form-control" name="hinh_anh">
-                                    <?php if (isset($_SESSION['errors']['hinh_anh'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['errors']['hinh_anh']; ?></p>
+                                    <img style="width: 30%;" src="<?= BASE_URL . $baiViet['anh'] ?>" alt=""> <br> <br>
+                                    <input type="file" class="form-control" name="anh">
+                                    <?php if (isset($_SESSION['errors']['anh'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['anh']; ?></p>
                                     <?php } ?>
                                 </div>
 

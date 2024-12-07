@@ -54,7 +54,7 @@
                                             <td><?= $key + 1 ?></td>
                                             <td><?= $khuyenMai['ma_khuyen_mai'] ?></td>
                                             <td><?= $khuyenMai['ten_khuyen_mai'] ?></td>
-                                            <td><?= $khuyenMai['gia_tri'] ?>%</td> <!-- Update to use 'gia_tri' -->
+                                            <td><?= formatprice($khuyenMai['gia_tri']) ?> VNĐ</td> <!-- Update to use 'gia_tri' -->
                                             <td><?= formatDate($khuyenMai['ngay_bat_dau']) ?></td>
                                             <td><?= formatDate($khuyenMai['ngay_ket_thuc']) ?></td>
                                             <td>

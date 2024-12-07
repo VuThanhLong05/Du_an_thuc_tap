@@ -60,12 +60,23 @@
                                                         <?php } ?>
                                                     </span>
                                                 </td>
-                                                <td class="pro-quantity">
+                                                <!-- <td class="pro-quantity">
                                                     <div class="pro-qty d-flex">
                                                         <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="post">
                                                             <div class="quantity-cart-box d-flex align-items-center mb-4">
                                                                 <input type="hidden" name="san_pham_id" value="<?= $thongTinSanPham['id'] ?>">
                                                                 <input type="text" value="<?= $sanPham['so_luong'] ?>" name="so_luong" class="form-control">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </td> -->
+
+                                                <td class="pro-quantity" style="text-align: center;">
+                                                    <div class="">
+                                                        <form action="<?= BASE_URL . '?act=them-gio-hang' ?>" method="post">
+                                                            <div class="quantity-cart-box d-flex align-items-center mb-4">
+                                                                <input type="hidden" name="san_pham_id" value="<?= $thongTinSanPham['id'] ?>">
+                                                                <input style="text-align: center;" type="text" value="<?= $sanPham['so_luong'] ?>" name="so_luong" class="form-control">
                                                             </div>
                                                         </form>
                                                     </div>
@@ -101,14 +112,14 @@
 
                         <!-- Cart Update Option -->
                         <div class="cart-update-option d-block d-md-flex justify-content-between">
-                            <div class="d-flex">
+                            <!-- <div class="d-flex">
                                 <form action="<?= BASE_URL . '?act=cap-nhat-gio-hang' ?>" method="post">
                                     <div class="cart-update" style="margin-left: 130px;">
                                         <input type="hidden" name="san_pham_id" value="<?= $sanPham['id'] ?>">
                                         <button type="submit" class="btn btn-sqr">Cập nhật giỏ hàng</button>
                                     </div>
                                 </form>
-                            </div>
+                            </div> -->
 
                             <div class="cart">
                                 <a href="<?= BASE_URL . '?act=lam-moi-gio-hang' ?>" class="btn btn-sqr" onclick="return confirm('Bạn có chắc muốn làm mới giỏ hàng?');">Làm mới giỏ hàng</a>

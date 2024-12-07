@@ -48,7 +48,7 @@ class AdminBaiVietController
             $noi_dung = $_POST['noi_dung'] ?? '';
             $ngay_dang = $_POST['ngay_dang'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
-            $hinh_anh = $_FILES['hinh_anh'] ?? null;
+            $hinh_anh = $_FILES['anh'] ?? null;
 
             // Tạo 1 mảng trống để chứa dữ liệu
             $errors = [];
@@ -71,7 +71,7 @@ class AdminBaiVietController
             if (!empty($hinh_anh['name'])) {
                 $file_thumb = uploadFile($hinh_anh, './uploads/');
                 if (!$file_thumb) {
-                    $errors['hinh_anh'] = 'Lỗi khi tải ảnh lên';
+                    $errors['anh'] = 'Lỗi khi tải ảnh lên';
                 }
             } else {
                 $file_thumb = null; // Cho phép không bắt buộc có ảnh
@@ -123,7 +123,7 @@ class AdminBaiVietController
             $noi_dung = $_POST['noi_dung'] ?? '';
             $ngay_dang = $_POST['ngay_dang'] ?? '';
             $trang_thai = $_POST['trang_thai'] ?? '';
-            $hinh_anh = $_FILES['hinh_anh'] ?? null;
+            $anh = $_FILES['anh'] ?? null;
 
             // Lấy thông tin bài viết cũ
             $baiViet = $this->modelBaiViet->getDetailBaiViet($id);
@@ -146,13 +146,13 @@ class AdminBaiVietController
                 $errors['trang_thai'] = 'Trạng thái không được để trống';
             }
             // Kiểm tra file upload
-            if (!empty($hinh_anh['name'])) {
-                $file_thumb = uploadFile($hinh_anh, './uploads/');
+            if (!empty($anh['name'])) {
+                $file_thumb = uploadFile($anh, './uploads/');
                 if (!$file_thumb) {
-                    $errors['hinh_anh'] = 'Lỗi khi tải ảnh lên';
+                    $errors['anh'] = 'Lỗi khi tải ảnh lên';
                 }
             } else {
-                $file_thumb = $baiViet['hinh_anh']; // Giữ nguyên ảnh cũ nếu không upload mới
+                $file_thumb = $baiViet['anh']; // Giữ nguyên ảnh cũ nếu không upload mới
             }
 
             $_SESSION['errors'] = $errors;

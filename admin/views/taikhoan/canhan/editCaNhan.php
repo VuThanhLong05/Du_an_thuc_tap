@@ -43,9 +43,9 @@
                                 <h6 class="mt-2">Họ và tên: <?= $thongTin['ho_ten'] ?></h6>
                                 <h6 class="mt-2">Chức vụ:
                                     <?php
-                                    if ($thongTin['chuc_vu_id'] == 1) {
+                                    if ($thongTin['vai_tro'] == 1) {
                                         echo 'Quản trị viên';
-                                    } elseif ($thongTin['chuc_vu_id'] !== 1) {
+                                    } elseif ($thongTin['vai_tro'] !== 1) {
                                         echo 'Khách hàng';
                                     } ?>
                                 </h6>
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <!-- edit form column -->
                     <!-- HTML Form -->
