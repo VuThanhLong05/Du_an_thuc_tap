@@ -29,24 +29,12 @@
     <!-- Default box -->
     <div class="card card-solid">
       <div class="card-body">
-        <div class="row">
-          <!-- <div class="col-12 col-sm-6">
-                        <div class="col-12">
-                            <img style="width:400px; height: 400px;" src="<?= BASE_URL . $sanPham['hinh_anh'] ?>" class="product-image" alt="Product Image">
-                        </div>
-                        <div class="col-12 product-image-thumbs">
-                            <!-- <div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div> -->
-          <!-- <?php foreach ($listAnhSanPham as $key => $anhSP) : ?>
-                                <div class="product-image-thumb <?= $anhSP[$key] == 0 ? 'active' : '' ?>"><img src="<?= BASE_URL . $anhSP['link_hinh_anh'] ?>" alt="Product Image"></div>
-                            <?php endforeach; ?> -->
-
-        </div>
-        <!-- </div> -->
+        
         <div class="col-12">
           <h3 class="my-3">Tiêu đề bài viết: <?= $baiViet['tieu_de'] ?></h3>
           <hr>
-          <!-- <h4 class="mt-3">Nội dung: </h4> <br> -->
-          <img style="width: 30%;" src="<?= BASE_URL . $baiViet['hinh_anh'] ?>" alt="">
+          <img style="width: 30%;" src="<?= BASE_URL. $baiViet['anh'] ?>" alt="">
+          <h4 class="mt-3">Nội dung: </h4> <br>
           <textarea class="form-control" style="width: 100%;" name="" id=""><?= $baiViet['noi_dung'] ?></textarea>
           <h4 class="mt-3">Ngày đăng: <small><?= formatDate($baiViet['ngay_dang']) ?></small></h4>
           <h4 class="mt-3">Trạng thái: <small><?= $baiViet['trang_thai'] == 1 ? 'Hiện' : 'Ẩn' ?></small></h4>

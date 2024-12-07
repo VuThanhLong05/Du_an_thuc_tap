@@ -213,7 +213,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="tab1">
                                 <div class="product-carousel-4 slick-row-10 slick-arrow-style">
-                                    <?php foreach ($listSanPham as $key => $sanPham): ?>
+                                    <?php foreach ($listSanPham as $sanPham): ?>
                                         <!-- product item start -->
                                         <div class="product-item">
                                             <figure class="product-thumb">

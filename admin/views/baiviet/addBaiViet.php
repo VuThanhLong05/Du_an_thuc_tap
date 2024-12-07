@@ -62,9 +62,9 @@
 
                                 <div class="form-group col-6">
                                     <label>Hình ảnh bài viết</label>
-                                    <input type="file" class="form-control" name="hinh_anh">
-                                    <?php if (isset($_SESSION['errors']['hinh_anh'])) { ?>
-                                        <p class="text-danger"><?= $_SESSION['errors']['hinh_anh']; ?></p>
+                                    <input type="file" class="form-control" name="anh">
+                                    <?php if (isset($_SESSION['errors']['anh'])) { ?>
+                                        <p class="text-danger"><?= $_SESSION['errors']['anh']; ?></p>
                                     <?php } ?>
                                 </div>
 

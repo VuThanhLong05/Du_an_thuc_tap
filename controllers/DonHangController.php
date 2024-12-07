@@ -20,6 +20,7 @@ class DonHangController
 
         $tai_khoan_id = $_SESSION['user']['id'];
         $donhang = $this->model->getDonHangByUserId($tai_khoan_id); // Lấy danh sách đơn hàng
+        $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
 
         require_once './views/donhang/listDonHang.php';
     }

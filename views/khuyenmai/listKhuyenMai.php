@@ -41,7 +41,7 @@
                                         <p class="mb-2"><strong>Thời gian:</strong>
                                             <?= date('d/m/Y', strtotime($km['ngay_bat_dau'])) ?> - <?= date('d/m/Y', strtotime($km['ngay_ket_thuc'])) ?>
                                         </p>
-                                        <p class="text-success fw-bold fs-5 mb-3">Giá trị: <?= htmlspecialchars($km['gia_tri']) ?>%</p>
+                                        <p class="text-success fw-bold fs-5 mb-3">Giá trị: <?= formatprice($km['gia_tri']) ?> VNĐ</p>
                                         <p class="promo-code text-center alert alert-secondary position-relative" style="word-wrap: break-word;">
                                             <?= htmlspecialchars($km['ma_khuyen_mai']) ?>
                                         </p>

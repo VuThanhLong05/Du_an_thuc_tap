@@ -24,7 +24,7 @@
                         <h1>Không tìm thấy khuyến mãi</h1>
                     <?php endif; ?>
                 </div>
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                     <form action="" method="post">
                         <select name="trang_thai" id="status" onchange="this.form.submit()">
                             <?php foreach ($listTrangThaiKhuyenMai as $key => $trangThai) : ?>
@@ -37,7 +37,7 @@
                             <?php endforeach; ?>
                         </select>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -93,6 +93,7 @@
                                 Thông tin khuyến mãi
                                 <address>
                                     <strong><?= isset($khuyenMai) ? $khuyenMai['ten_khuyen_mai'] : '' ?></strong><br>
+                                    <strong>Mã khuyến mãi: <?= isset($khuyenMai) ? $khuyenMai['ma_khuyen_mai'] : '' ?></strong><br>
                                     Giá trị khuyến mãi: <?= isset($khuyenMai) ? formatprice($khuyenMai['gia_tri']) : '' ?><br>
                                     Mô tả: <?= isset($khuyenMai) ? $khuyenMai['mo_ta'] : '' ?><br>
                                 </address>
@@ -106,19 +107,19 @@
                                 </address>
                             </div>
 
-                            <div class="col-sm-4 invoice-col">
+                            <!-- <div class="col-sm-4 invoice-col">
                                 Thông tin khuyến mãi
-                                <address>
-                                    <strong>Mã khuyến mãi: <?= isset($khuyenMai) ? $khuyenMai['ma_khuyen_mai'] : '' ?></strong><br>
-                                    Tổng giá trị khuyến mãi: <?= isset($khuyenMai)   ? formatprice($khuyenMai['gia_tri_tong']) : '' ?><br>
-                                    Ghi chú: <?= isset($khuyenMai) ? $khuyenMai['ghi_chu'] : '' ?><br>
-                                    Phương thức áp dụng: <?= isset($khuyenMai) ? $khuyenMai['phuong_thuc_ap_dung'] : '' ?><br>
-                                </address>
-                            </div>
+                                <address> -->
+                            <!-- <strong>Mã khuyến mãi: <?= isset($khuyenMai) ? $khuyenMai['ma_khuyen_mai'] : '' ?></strong><br> -->
+                            <!-- Tổng giá trị khuyến mãi: <?= isset($khuyenMai)   ? formatprice($khuyenMai['gia_tri']) : '' ?><br> -->
+                            <!-- Ghi chú: <?= isset($khuyenMai) ? $khuyenMai['mo_ta'] : '' ?><br> -->
+                            <!-- Phương thức áp dụng: <?= isset($khuyenMai) ? $khuyenMai['phuong_thuc_ap_dung'] : '' ?><br> -->
+                            <!-- </address>
+                            </div> -->
                         </div>
 
                         <!-- Table row -->
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-12 table-responsive">
                                 <table class="table table-striped">
                                     <thead>
@@ -147,9 +148,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col-6">
                                 <p class="lead">Ngày bắt đầu: <?= isset($khuyenMai) ? formatDate($khuyenMai['ngay_bat_dau']) : '' ?></p>
 
@@ -171,7 +172,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div><!-- /.col -->

@@ -55,7 +55,7 @@
 
                 <div class="form-group">
                     <label for="gioi_tinh">Giới tính:</label><br>
-                    <select class="form-control" id="gioi_tinh" name="gioi_tinh">
+                    <select class="form-control" id="gioi_tinh" name="gioi_tinh" >
                         <option value="Nam" <?= $thongTin['gioi_tinh'] === 'Nam' ? 'selected' : ''; ?>>Nam</option>
                         <option value="Nữ" <?= $thongTin['gioi_tinh'] === 'Nữ' ? 'selected' : ''; ?>>Nữ</option>
                         <option value="Khác" <?= $thongTin['gioi_tinh'] === 'Khác' ? 'selected' : ''; ?>>Khác</option>
@@ -63,18 +63,20 @@
                 </div><br>
 
                 <div class="form-group">
-                    <label>Địa chỉ:</label>
-                    <input class="form-control" type="text" value="<?= $thongTin['dia_chi']; ?>"
-                        name="dia_chi">
-                </div>
-
-                <div class="form-group">
                     <label>Ngày sinh:</label>
                     <input class="form-control" type="date" value="<?= htmlspecialchars($thongTin['ngay_sinh']); ?>"
                         name="ngay_sinh">
                 </div>
 
-                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                <div class="form-group">
+                    <label>Địa chỉ:</label>
+                    <input class="form-control" type="text" value="<?= $thongTin['dia_chi']; ?>"
+                        name="dia_chi">
+                </div>
+
+                
+
+                <button style="padding: 8px;" type="submit" class="btn btn-primary">Cập nhật</button>
             </form>
         </div>
 

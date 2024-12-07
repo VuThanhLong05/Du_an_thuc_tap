@@ -164,7 +164,7 @@
                                         </tr>
                                         <tr>
                                             <th>Tông tiền:</th>
-                                            <td><?= formatprice($tong_tien) + 50000 ?>VNĐ</td>
+                                            <td><?= formatprice($tong_tien + 50000) ?>VNĐ</td>
                                         </tr>
                                     </table>
                                 </div>

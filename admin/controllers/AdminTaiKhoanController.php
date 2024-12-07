@@ -122,7 +122,7 @@ class AdminTaiKhoanController
                     $trang_thai
                 );
 
-                header('Location: ' . BASE_URL_ADMIN . '?act=list-tai-khoan-quan-tri');
+                header('Location: ' . BASE_URL_ADMIN . '?act=form-sua-thong-tin-ca-nhan-quan-tri' . $quan_tri_id);
                 exit();
             } else {
                 $_SESSION['flash'] = true;
@@ -307,9 +307,7 @@ class AdminTaiKhoanController
         deleteSessionError();
     }
 
-    public function postEditCaNhanQuanTri() {
-    
-    }
+    public function postEditCaNhanQuanTri() {}
 
 
     public function postEditMatKhauCaNhan()
