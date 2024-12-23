@@ -39,7 +39,7 @@
 
                     <?php foreach ($donhang as $item): ?>
                         <tr>
-                            <td><?= htmlspecialchars($item['ho_ten']) ?></td>
+                            <td><?= htmlspecialchars($item['ten_nguoi_nhan']) ?></td>
                             <td><?= htmlspecialchars($item['ma_don_hang']) ?></td>
                             <td><?= htmlspecialchars($item['ngay_dat']) ?></td>
                             <td>

@@ -45,7 +45,7 @@
     <table class="customer-info">
         <tr>
             <th>Tên khách hàng:</th>
-            <td><?php echo $chitietdonhang[0]['ho_ten']; ?></td>
+            <td><?php echo $chitietdonhang[0]['ten_nguoi_nhan']; ?></td>
         </tr>
         <tr>
             <th>Địa chỉ:</th>
