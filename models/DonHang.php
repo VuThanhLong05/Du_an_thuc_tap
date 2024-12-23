@@ -106,7 +106,8 @@ class DonHang
             (ct.so_luong * sp.gia_san_pham) AS thanh_tien,  
             sp.hinh_anh,
             dh.tong_tien,  -- Lấy trường tổng tiền từ bảng don_hangs
-            dh.trang_thai_thanh_toan_id  -- Lấy trực tiếp trường trạng thái thanh toán ID
+            dh.trang_thai_thanh_toan_id ,
+            dh.ten_nguoi_nhan -- Lấy trực tiếp trường trạng thái thanh toán ID
         FROM 
             don_hangs AS dh
         INNER JOIN 
