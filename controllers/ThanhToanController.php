@@ -165,7 +165,7 @@ class ThanhToanController
         $dia_chi_nguoi_nhan = $_POST['dia_chi_nguoi_nhan'];
         $ghi_chu = $_POST['ghi_chu'];
         $ngay_dat = date('Y-m-d');
-        $trang_thai_id = 1; // Trạng thái đơn hàng: đang chờ xử lý
+        $trang_thai_id = 2; // Trạng thái đơn hàng: đã xác nhận
         $phuong_thuc_thanh_toan_id = 2; // Thanh toán Momo
         $trang_thai_thanh_toan_id = 1; // Trạng thái thanh toán: đang chờ
 
