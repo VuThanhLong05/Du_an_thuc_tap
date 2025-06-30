@@ -383,4 +383,226 @@
 
 </main>
 
+
+<!-- Nút mở chatbot hình gấu -->
+<button id="toggle-chat" class="chat-toggle">
+    🧸
+</button>
+
+<!-- Hộp chat AI cute -->
+<div id="chatbox" class="chatbox-container-cute">
+    <div class="chatbox-header-cute">🧸 Trợ lý Gấu Bông</div>
+    <div id="chat-log" class="chatbox-body-cute"></div>
+    <form id="chat-form" class="chatbox-footer-cute">
+        <input type="text" id="user-input" placeholder="Gấu đang lắng nghe bạn..." required />
+        <button type="submit">🎁 Gửi</button>
+    </form>
+</div>
+
+<style>
+    /* Nút mở */
+    .chat-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ffccdd;
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        font-size: 26px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: bounce 2s infinite;
+        z-index: 9999;
+    }
+
+    @keyframes bounce {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-6px);
+        }
+    }
+
+    /* Khung chat */
+    .chatbox-container-cute {
+        position: fixed;
+        bottom: 90px;
+        right: 20px;
+        width: 350px;
+        background: #fff0f5;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        z-index: 9998;
+        font-family: 'Comic Sans MS', cursive;
+    }
+
+    /* Header */
+    .chatbox-header-cute {
+        background: #ff88aa;
+        color: white;
+        padding: 12px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    /* Nội dung chat */
+    .chatbox-body-cute {
+        padding: 10px;
+        height: 280px;
+        overflow-y: auto;
+        background: #fffafc;
+    }
+
+    .chat-message {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .chat-message.user {
+        justify-content: flex-end;
+    }
+
+    .chat-message.bot {
+        justify-content: flex-start;
+    }
+
+    .bubble {
+        max-width: 80%;
+        padding: 10px 14px;
+        border-radius: 20px;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .user .bubble {
+        background: #ffc0cb;
+        color: white;
+        border-bottom-right-radius: 0;
+    }
+
+    .bot .bubble {
+        background: #ffffff;
+        color: #555;
+        border-bottom-left-radius: 0;
+        border: 1px solid #f2f2f2;
+    }
+
+    /* Footer */
+    .chatbox-footer-cute {
+        display: flex;
+        border-top: 1px solid #ffd6e0;
+        background: #fffafc;
+        padding: 10px;
+    }
+
+    .chatbox-footer-cute input {
+        flex: 1;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 12px;
+        margin-right: 8px;
+    }
+
+    .chatbox-footer-cute button {
+        background: #ff88aa;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 16px;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggleBtn = document.getElementById("toggle-chat");
+        const chatBox = document.getElementById("chatbox");
+        const form = document.getElementById("chat-form");
+        const input = document.getElementById("user-input");
+        const chatLog = document.getElementById("chat-log");
+
+        let firstOpen = true; // Cờ kiểm tra lần đầu mở chat
+
+        toggleBtn.addEventListener("click", () => {
+            const isHidden = chatBox.style.display === "none" || chatBox.style.display === "";
+            chatBox.style.display = isHidden ? "flex" : "none";
+
+            if (isHidden && firstOpen) {
+                // Lời chào lần đầu
+                chatLog.innerHTML += `
+                <div class="chat-message bot">
+                    <div class="bubble">🧸 Xin chào! Trợ lý Gấu Bông luôn sẵn sàng giúp bạn 💬. Bạn muốn tìm gì nào?</div>
+                </div>`;
+                chatLog.scrollTop = chatLog.scrollHeight;
+                firstOpen = false;
+            }
+        });
+
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Thêm tin nhắn người dùng
+            chatLog.innerHTML += `
+    <div class="chat-message user">
+        <div class="bubble">${message}</div>
+    </div>`;
+            input.value = "";
+            chatLog.scrollTop = chatLog.scrollHeight;
+
+            // Thêm hiệu ứng Gấu đang gõ...
+            const loadingId = "loading-msg";
+            chatLog.innerHTML += `
+    <div class="chat-message bot" id="${loadingId}">
+        <div class="bubble">🧸 Gấu đang gõ...</div>
+    </div>`;
+            chatLog.scrollTop = chatLog.scrollHeight;
+
+            try {
+                const res = await fetch("chatbot.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"  
+                    },
+                    body: JSON.stringify({
+                        message
+                    })
+                });
+
+                const data = await res.json();
+                const reply = data.reply || "Xin lỗi, tôi không hiểu yêu cầu.";
+
+                // Xóa dòng "Gấu đang gõ..."
+                document.getElementById(loadingId)?.remove();
+
+                // Hiển thị phản hồi thật
+                chatLog.innerHTML += `
+        <div class="chat-message bot">
+            <div class="bubble">${reply}</div>
+        </div>`;
+                chatLog.scrollTop = chatLog.scrollHeight;
+            } catch (error) {
+                document.getElementById(loadingId)?.remove();
+
+                chatLog.innerHTML += `
+        <div class="chat-message bot">
+            <div class="bubble">❌ Lỗi kết nối. Vui lòng thử lại sau.</div>
+        </div>`;
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }
+        });
+    });
+</script>
+
 <?php require_once 'layout/footer.php'; ?>
