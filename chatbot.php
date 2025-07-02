@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // 🔐 API Key Gemini
-$apiKey = 'AIzaSyDw7uDwMpD8FZUUq_EhKnVGBI7ZSKFH1lQ';
+// $apiKey = 'AIzaSyDw7uDwMpD8FZUUq_EhKnVGBI7ZSKFH1lQ';
 if (!$apiKey) {
     echo json_encode(['reply' => '❗Chưa cấu hình API Key.'], JSON_UNESCAPED_UNICODE);
     exit;
