@@ -1,4 +1,5 @@
 <?php
+// models/BinhLuan.php
 class BinhLuan
 {
     public $conn;

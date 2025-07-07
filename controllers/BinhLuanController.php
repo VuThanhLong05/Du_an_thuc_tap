@@ -1,4 +1,5 @@
 <?php
+// Vũ Thành Long - 2025
 class BinhLuanController
 {
     public $modelBinhLuan;
