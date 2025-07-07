@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // 🔐 API Key Gemini
-// $apiKey = 'AIzaSyDw7uDwMpD8FZUUq_EhKnVGBI7ZSKFH1lQ';
+$apiKey = 'AIzaSyDw7uDwMpD8FZUUq_EhKnVGBI7ZSKFH1lQ';
 if (!$apiKey) {
     echo json_encode(['reply' => '❗Chưa cấu hình API Key.'], JSON_UNESCAPED_UNICODE);
     exit;
@@ -19,7 +19,7 @@ if (empty($message)) {
 }
 
 // 🔌 Kết nối CSDL thật
-$conn = new mysqli("localhost", "root", "", "duan_1");
+$conn = new mysqli("localhost", "root", "", "datt");
 if ($conn->connect_error) {
     echo json_encode(['reply' => '❗Lỗi kết nối CSDL: ' . $conn->connect_error], JSON_UNESCAPED_UNICODE);
     exit;
