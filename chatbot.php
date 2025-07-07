@@ -1,12 +1,9 @@
 <?php
+session_start();
 header('Content-Type: application/json');
 
 // 🔐 API Key Gemini
 $apiKey = 'AIzaSyDw7uDwMpD8FZUUq_EhKnVGBI7ZSKFH1lQ';
-if (!$apiKey) {
-    echo json_encode(['reply' => '❗Chưa cấu hình API Key.'], JSON_UNESCAPED_UNICODE);
-    exit;
-}
 
 // 📨 Nhận message từ client
 $rawData = file_get_contents("php://input");
@@ -18,7 +15,7 @@ if (empty($message)) {
     exit;
 }
 
-// 🔌 Kết nối CSDL thật
+// 🔌 Kết nối CSDL
 $conn = new mysqli("localhost", "root", "", "datt");
 if ($conn->connect_error) {
     echo json_encode(['reply' => '❗Lỗi kết nối CSDL: ' . $conn->connect_error], JSON_UNESCAPED_UNICODE);
@@ -28,9 +25,9 @@ if ($conn->connect_error) {
 $messageLower = mb_strtolower($message);
 $reply = null;
 
-// 🧠 Logic xử lý CSDL thông minh hơn
+// 🧠 Logic xử lý CSDL
 if (preg_match('/sản phẩm mới/i', $messageLower)) {
-    $sql = "SELECT ten_san_pham FROM san_phams ORDER BY created_at DESC LIMIT 5";
+    $sql = "SELECT ten_san_pham FROM san_phams ORDER BY ngay_nhap DESC LIMIT 5";
     $result = $conn->query($sql);
     if ($result && $result->num_rows > 0) {
         $reply = "🆕 Các sản phẩm mới nhất:\n";
@@ -40,21 +37,22 @@ if (preg_match('/sản phẩm mới/i', $messageLower)) {
     } else {
         $reply = "⚠️ Hiện chưa có sản phẩm mới nào.";
     }
-} elseif (preg_match('/(danh mục|loại hàng|loại sản phẩm)/i', $messageLower)) {
+} elseif (preg_match('/(danh mục|loại hàng|loại sản phẩm)/iu', $messageLower)) {
     $sql = "SELECT ten_danh_muc FROM danh_mucs";
     $result = $conn->query($sql);
     if ($result && $result->num_rows > 0) {
-        $reply = "📂 Các danh mục sản phẩm:\n";
+        $reply = "📂 Các danh mục sản phẩm hiện có:\n";
         while ($row = $result->fetch_assoc()) {
             $reply .= "• " . $row['ten_danh_muc'] . "\n";
         }
     } else {
-        $reply = "⚠️ Chưa có danh mục nào trong hệ thống.";
+        $reply = "🤖 Chưa có danh mục cụ thể, nhưng bạn có thể hỏi về các loại gấu như gấu teddy, gấu trắng, v.v.";
     }
 } elseif (preg_match('/sản phẩm (.+)/iu', $messageLower, $matches)) {
     $tuKhoa = $conn->real_escape_string($matches[1]);
     $sql = "SELECT ten_san_pham, gia_san_pham FROM san_phams WHERE ten_san_pham LIKE '%$tuKhoa%' LIMIT 5";
     $result = $conn->query($sql);
+
     if ($result && $result->num_rows > 0) {
         $reply = "🔍 Kết quả tìm kiếm cho \"$tuKhoa\":\n";
         while ($row = $result->fetch_assoc()) {
@@ -62,24 +60,59 @@ if (preg_match('/sản phẩm mới/i', $messageLower)) {
             $reply .= "• " . $row['ten_san_pham'] . " — " . $gia . "₫\n";
         }
     } else {
-        $reply = "❌ Không tìm thấy sản phẩm nào với từ khóa \"$tuKhoa\".";
+        // Gợi ý sản phẩm ngẫu nhiên nếu không tìm thấy
+        $sqlSuggest = "SELECT ten_san_pham, gia_san_pham FROM san_phams ORDER BY RAND() LIMIT 3";
+        $resultSuggest = $conn->query($sqlSuggest);
+
+        $reply = "🤖 Không tìm thấy sản phẩm chính xác cho \"$tuKhoa\".\nBạn có thể tham khảo một số sản phẩm sau:\n";
+        while ($row = $resultSuggest->fetch_assoc()) {
+            $gia = number_format($row['gia_san_pham'], 0, ',', '.');
+            $reply .= "• " . $row['ten_san_pham'] . " — " . $gia . "₫\n";
+        }
     }
 }
 
-// 📦 Nếu có kết quả từ CSDL thì trả về luôn
+// 📦 Nếu tìm thấy câu trả lời từ DB
 if ($reply !== null) {
+    // Lưu vào DB
+    $stmt = $conn->prepare("INSERT INTO chat_logs (user_message, bot_reply) VALUES (?, ?)");
+    $stmt->bind_param("ss", $message, $reply);
+    $stmt->execute();
+
+    // Lưu vào session
+    $_SESSION['chat_history'][] = [
+        'user' => $message,
+        'bot' => $reply
+    ];
+    // Giới hạn tối đa 100 lượt
+    $_SESSION['chat_history'] = array_slice($_SESSION['chat_history'], -100);
+
     echo json_encode(['reply' => $reply], JSON_UNESCAPED_UNICODE);
     $conn->close();
     exit;
 }
 
-// 🤖 Nếu không khớp logic nào, gửi sang Gemini
-$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey;
+// 🧠 Nếu không khớp DB, dùng hội thoại từ session gửi cho AI
+$history = "";
+if (!isset($_SESSION['chat_history'])) {
+    $_SESSION['chat_history'] = [];
+}
 
+foreach ($_SESSION['chat_history'] as $chat) {
+    $history .= "Người dùng: " . $chat['user'] . "\n";
+    $history .= "Chatbot: " . $chat['bot'] . "\n";
+}
+
+$prompt = $history . "Người dùng: $message\nChatbot:";
+
+// 🤖 Gửi sang Gemini
+$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey";
 $postData = [
     "contents" => [
         [
-            "parts" => [["text" => $message]]
+            "parts" => [
+                ["text" => $prompt]
+            ]
         ]
     ]
 ];
@@ -97,14 +130,22 @@ if ($response === false) {
 }
 
 $result = json_decode($response, true);
-if (isset($result['error'])) {
-    echo json_encode(['reply' => '❌ Lỗi API: ' . $result['error']['message']], JSON_UNESCAPED_UNICODE);
-    $conn->close();
-    exit;
-}
-
 $aiReply = $result['candidates'][0]['content']['parts'][0]['text'] ?? '🤖 Không có phản hồi từ AI.';
+
+// Lưu AI vào DB
+$stmt = $conn->prepare("INSERT INTO chat_logs (user_message, bot_reply) VALUES (?, ?)");
+$stmt->bind_param("ss", $message, $aiReply);
+$stmt->execute();
+
+// Lưu vào session
+$_SESSION['chat_history'][] = [
+    'user' => $message,
+    'bot' => $aiReply
+];
+$_SESSION['chat_history'] = array_slice($_SESSION['chat_history'], -100);
+
 echo json_encode(['reply' => $aiReply], JSON_UNESCAPED_UNICODE);
 
 curl_close($ch);
 $conn->close();
+?>
